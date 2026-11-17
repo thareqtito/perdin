@@ -254,7 +254,7 @@ table.peg tr.miss td{background:#fffaf0}
   <div class="card">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-hash"/></svg></div><div><h2>Nomor &amp; Dasar</h2><p>Nomor surat tugas dan dasar penugasan</p></div></div>
     <div class="cb"><div class="grid">
-      <div class="f"><label for="nomor">Nomor SPT</label><input id="nomor" data-f="nomor" placeholder="mis. 16" inputmode="numeric">
+      <div class="f"><label for="nomor">Nomor SPT</label><input id="nomor" data-f="nomor" placeholder="mis. 16">
         <div class="hint">Menjadi <b id="nomorFull">-</b></div></div>
       <div class="f datebox"><label for="tglDisahkan">Tanggal Disahkan</label><input type="date" id="tglDisahkan" data-f="tglDisahkan"><span class="pill" id="h-tglDisahkan"></span></div>
       <div class="f full"><label for="dasar1">Dasar 1 <span class="opt">Surat undangan</span></label><textarea id="dasar1" data-f="dasar1" rows="2" placeholder="Surat Undangan … Nomor … Tanggal …"></textarea></div>
@@ -30710,7 +30710,7 @@ MAX: 9026 };
     const tahun = (form.tglDisahkan || form.tglBerangkat || '').slice(0, 4) || String(new Date().getFullYear());
     const tpl = (s) => String(s || '').replace(/\{TAHUN\}/g, tahun);
     let nomor = String(form.nomor || '').trim();
-    if (nomor && !nomor.includes('/')) nomor = (/^\d+$/.test(nomor) ? nomor.padStart(3, '0') : nomor) + tpl(set.nomorSuffix);
+    if (nomor && !nomor.includes('/')) nomor = nomor + tpl(set.nomorSuffix);
     const kom = (form.komisioner || []).filter(Boolean).map(find);
     const sek = (form.sekretariat || []).filter(Boolean).map(find);
     const pengikut = [];
@@ -31179,9 +31179,13 @@ function emptyForm(){ const f = clone(D.CONTOH);
 function load(){
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
-  S = { form: clone(D.CONTOH), pegawai: clone(D.PEGAWAI), pegVer: D.PEGAWAI_VER, settings: clone(D.SETTINGS) };
+  S = { form: emptyForm(), formVer: 2, pegawai: clone(D.PEGAWAI), pegVer: D.PEGAWAI_VER, settings: clone(D.SETTINGS) };
   if (saved) {
-    if (saved.form) S.form = Object.assign(clone(D.CONTOH), saved.form);
+    if (saved.form) {
+      // isian contoh dari versi sebelumnya (belum pernah diubah) → mulai dari form kosong
+      const masihContoh = saved.form.uraian === D.CONTOH.uraian && String(saved.form.nomor) === String(D.CONTOH.nomor) && !saved.formVer;
+      S.form = masihContoh ? emptyForm() : Object.assign(emptyForm(), saved.form);
+    }
     if (Array.isArray(saved.pegawai) && saved.pegawai.length) {
       if (saved.pegVer === D.PEGAWAI_VER) S.pegawai = saved.pegawai;
       else { // data pegawai bawaan diperbarui: pakai data baru, pertahankan NIP yang sudah Anda isi
@@ -31348,7 +31352,7 @@ async function gen(kind, list){
     if (!list.length) return toast('Centang minimal satu nama untuk SPD', 1);
   }
   if (miss.length && !(await ask('Data berikut belum diisi: ' + miss.join(', ') + '. Tetap buat dokumen?'))) return;
-  const no = safe(String(S.form.nomor || 'tanpa-nomor').padStart(3, '0'));
+  const no = safe(String(S.form.nomor || 'tanpa-nomor'));
   let doc, name;
   try {
     if (kind === 'spt') { doc = G.spt(c, LOGO, 'kom'); name = `SPT_${no}_Komisioner.docx`; }
