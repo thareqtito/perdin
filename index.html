@@ -32,7 +32,9 @@ nav.tabs{margin-left:auto;display:flex;gap:4px;background:var(--bg);padding:4px;
 nav.tabs button{display:flex;align-items:center;gap:7px;background:none;border:0;color:var(--ink2);padding:8px 14px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600}
 nav.tabs button:hover{color:var(--ink)}
 nav.tabs button.on{background:#fff;color:var(--brand);box-shadow:var(--sh)}
-@media (max-width:720px){nav.tabs button span{display:none}.brand small{display:none}}
+@media (max-width:1180px){nav.tabs button span{display:none}}
+@media (max-width:720px){.brand small{display:none}}
+@media (max-width:560px){.brand>div,.brand .acc{display:none}.bar{padding:8px 12px}nav.tabs button{padding:8px 11px}}
 
 main{padding:18px 22px 40px;max-width:2200px;margin:0 auto}
 .view{display:none}.view.on{display:block;animation:fade .25s ease}
@@ -50,7 +52,11 @@ main{padding:18px 22px 40px;max-width:2200px;margin:0 auto}
 .ch .ic{width:36px;height:36px;border-radius:10px;background:var(--brand-50);color:var(--brand);display:grid;place-items:center;flex:none}
 .ch h2{margin:0;font-size:15px;font-weight:700;letter-spacing:-.1px}
 .ch p{margin:1px 0 0;font-size:12.5px;color:var(--mut)}
+.ch{flex-wrap:wrap}
+.ch>div:not(.ic):not(.rt):not(.no):not(.tot2){min-width:0;flex:1 1 220px}
 .ch .rt{margin-left:auto}
+.bk .ch input.bn{flex:1 1 180px;min-width:0}
+@media (max-width:600px){.ch .rt{margin-left:0;width:100%}.ch .rt .btn{width:100%}}
 .cb{padding:16px 20px 20px}
 .sub{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--mut);margin:18px 0 10px;display:flex;align-items:center;gap:8px}
 .sub:first-child{margin-top:0}
@@ -213,6 +219,54 @@ table.peg tr.miss td{background:#fffaf0}
 .setgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
 @media (max-width:1100px){.setgrid{grid-template-columns:1fr}}
 
+/* ---------- rincian ---------- */
+.bk{margin-bottom:18px}
+.bk .ch .no{width:36px;height:36px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
+.bk .ch input.bn{font-weight:700;font-size:15px;background:transparent;border-color:transparent;padding:6px 8px;max-width:420px}
+.bk .ch input.bn:hover{border-color:var(--line2)}
+.bk .ch input.bn:focus{background:#fff}
+.tot2{margin-left:auto;text-align:right;white-space:nowrap}
+.tot2 b{display:block;font-size:16px}
+.tot2 small{color:var(--mut);font-size:11.5px}
+.grp{border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:14px;background:#fcfcfd}
+.grp-h{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.grp-h .gn{width:26px;height:26px;border-radius:8px;background:var(--brand-50);color:var(--brand);display:grid;place-items:center;font-weight:700;font-size:12.5px;flex:none}
+.grp-h input{font-weight:600}
+.rit{display:grid;grid-template-columns:130px minmax(0,1fr) 120px 34px;gap:8px;align-items:center;padding:8px 0;border-top:1px dashed var(--line)}
+.rit:first-of-type{border-top:0}
+.rit .fl{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.rit .fl>*{flex:1 1 110px;min-width:0}
+.rit .fl>.wide{flex:2 1 200px}
+.rit .amt{text-align:right;font-weight:700;font-size:13.5px;white-space:nowrap}
+.rit .amt small{display:block;font-weight:500;color:var(--mut);font-size:11px;white-space:normal}
+.rit select,.rit input{padding:8px 10px;font-size:13px}
+.rit .rm,.grp-h .rm{width:34px;height:34px;flex:none;border:1px solid var(--line2);background:#fff;border-radius:9px;color:var(--mut);cursor:pointer;font-size:17px;line-height:1}
+.rit .rm:hover,.grp-h .rm:hover{color:var(--brand);border-color:#f1c9cb;background:var(--brand-50)}
+.mini{position:relative}
+.mini span{position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--mut);pointer-events:none}
+.mini input{padding-right:46px}
+.mini.pre span{left:10px;right:auto}
+.mini.pre input{padding-left:30px;padding-right:10px}
+@media (max-width:760px){.rit{grid-template-columns:1fr 34px}.rit .ty{grid-column:1/2}.rit .fl{grid-column:1/-1}.rit .amt{grid-column:1/2;text-align:left}.rit .rm{grid-column:2;grid-row:1}}
+.tb{margin-top:14px;padding:10px 12px;background:var(--bg);border-radius:12px;font-size:12.5px;color:var(--ink2)}
+.tb i{color:var(--ink)}
+.empty-st{text-align:center;padding:36px 20px;color:var(--mut)}
+.empty-st svg{width:40px;height:40px;color:var(--brand);margin-bottom:8px}
+.empty-st b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+.blist .it2{display:flex;align-items:center;gap:10px;padding:9px 10px;border-bottom:1px solid var(--line);font-size:13px}
+.blist .it2:last-child{border-bottom:0}
+.blist .it2 .nm{flex:1;min-width:0;font-weight:600}
+.blist .it2 .nm small{display:block;color:var(--mut);font-weight:500;font-size:11.5px}
+.kwc .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+@media (max-width:760px){.kwc .meta{grid-template-columns:1fr}}
+.kwc .meta div{background:var(--bg);border-radius:10px;padding:8px 10px;min-width:0}
+.kwc .meta span{display:block;font-size:11px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.kwc .meta b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis}
+.nbk{display:flex;align-items:center;gap:0}
+.nbk input{border-top-right-radius:0;border-bottom-right-radius:0;max-width:110px}
+.nbk .sf{flex:1;min-width:0}
+.nbk .sf input{border-radius:0 var(--rf) var(--rf) 0;border-left:0;max-width:none}
+
 /* ---------- toast & modal ---------- */
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);background:#16181d;color:#fff;padding:11px 16px;border-radius:12px;font-size:13px;font-weight:500;opacity:0;transition:.25s;pointer-events:none;z-index:60;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 #toast.show{opacity:1;transform:translateX(-50%)}
@@ -237,6 +291,9 @@ table.peg tr.miss td{background:#fffaf0}
   <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17h14v-5l-2-5H7l-2 5zM5 17v2M19 17v2"/><circle cx="8" cy="14" r="1"/><circle cx="16" cy="14" r="1"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 10-4.5M19 14v6M16 17h6"/></symbol>
   <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l3-2 3 2 3-2 3 2 3-2 3 2V2l-3 2-3-2-3 2-3-2-3 2z"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24"><path d="m15 4 5 5M3 21l12-12M14 2v2M20 8h2M18 3l1-1M11 6h-1M17 12v1"/></symbol>
   <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
 </svg>
 
@@ -245,6 +302,8 @@ table.peg tr.miss td{background:#fffaf0}
     <div><h1>Generator SPPD</h1><small>KPU Kabupaten Pacitan · SPT · SPD · SPD-B · LPD (Word A4)</small></div></div>
   <nav class="tabs">
     <button data-v="form" class="on"><svg class="i"><use href="#i-file"/></svg><span>Form SPPD</span></button>
+    <button data-v="rk"><svg class="i"><use href="#i-calc"/></svg><span>Rincian SPPD</span></button>
+    <button data-v="kw"><svg class="i"><use href="#i-receipt"/></svg><span>Kwitansi</span></button>
     <button data-v="peg"><svg class="i"><use href="#i-users"/></svg><span>Data Pegawai</span></button>
     <button data-v="set"><svg class="i"><use href="#i-gear"/></svg><span>Pengaturan</span></button>
   </nav>
@@ -373,6 +432,63 @@ table.peg tr.miss td{background:#fffaf0}
 </section>
 
 <!-- ================= PEGAWAI ================= -->
+<!-- ================= RINCIAN SPPD ================= -->
+<section class="view" id="v-rk">
+<div class="layout">
+<div>
+  <div class="card" style="margin-bottom:18px">
+    <div class="ch"><div class="ic"><svg class="i"><use href="#i-calc"/></svg></div><div><h2>Rincian Pertanggungjawaban Perjalanan Dinas</h2><p id="rkSrc">Data surat tugas diambil dari Form SPPD</p></div>
+      <div class="rt row"><button class="btn sm" id="rkAuto"><svg class="i" style="width:15px;height:15px"><use href="#i-wand"/></svg> Susun otomatis dari Form SPPD</button></div></div>
+    <div class="cb" style="padding-top:12px"><div class="hint" style="margin:0;display:block">Satu <b>berkas</b> = satu lembar rincian + satu kwitansi (mis. Uang Harian &amp; Penginapan, Transport BBM, Tol). Jumlah dihitung otomatis.</div></div>
+  </div>
+  <div id="bkList"></div>
+  <div class="card"><div class="cb row" style="align-items:center">
+    <select id="bkPreset" style="max-width:300px"><option value="harian">Uang Harian &amp; Penginapan</option><option value="bbm">Transport PP (BBM)</option><option value="tol">Tol PP</option><option value="kosong">Berkas kosong</option></select>
+    <button class="btn pri" id="bkAdd">+ Tambah berkas</button>
+  </div></div>
+</div>
+<aside class="side">
+  <div class="card">
+    <div class="ch"><div class="ic"><svg class="i"><use href="#i-print"/></svg></div><div><h2>Cetak</h2><p>Word (.docx) A4, satu halaman per berkas</p></div></div>
+    <div class="cb">
+      <div id="rkWarn"></div>
+      <div class="acts">
+        <button class="act" data-rk="rincian"><span class="ic"><svg class="i"><use href="#i-calc"/></svg></span><span class="t"><b>Cetak Rincian</b><small>Semua berkas</small></span><svg class="i dl"><use href="#i-dl"/></svg></button>
+        <button class="act" data-rk="kwitansi"><span class="ic"><svg class="i"><use href="#i-receipt"/></svg></span><span class="t"><b>Cetak Kwitansi</b><small>Semua berkas</small></span><svg class="i dl"><use href="#i-dl"/></svg></button>
+        <button class="act" data-rk="keduanya"><span class="ic"><svg class="i"><use href="#i-file"/></svg></span><span class="t"><b>Rincian + Kwitansi</b><small>Berurutan per berkas</small></span><svg class="i dl"><use href="#i-dl"/></svg></button>
+      </div>
+      <div class="sub" style="margin-top:18px">Per berkas</div>
+      <div class="spdlist blist" id="rkPer"></div>
+      <div class="f"><label for="rkTgl">Tanggal pembayaran <span class="opt">opsional</span></label><input type="date" id="rkTgl">
+        <div class="hint">Kosongkan agar tanggal ditulis tangan: “Pacitan, &nbsp;&nbsp;&nbsp; September 2026”.</div></div>
+      <div class="sub" style="margin-top:18px">Ringkasan</div>
+      <div class="sum" id="rkSum"></div>
+    </div>
+  </div>
+</aside>
+</div>
+</section>
+
+<!-- ================= KWITANSI ================= -->
+<section class="view" id="v-kw">
+<div class="layout">
+<div id="kwList"></div>
+<aside class="side">
+  <div class="card">
+    <div class="ch"><div class="ic"><svg class="i"><use href="#i-print"/></svg></div><div><h2>Cetak Kwitansi</h2><p>Jumlah &amp; terbilang mengikuti Rincian SPPD</p></div></div>
+    <div class="cb">
+      <div class="acts">
+        <button class="act" data-rk="kwitansi"><span class="ic"><svg class="i"><use href="#i-receipt"/></svg></span><span class="t"><b>Cetak Kwitansi</b><small>Semua berkas</small></span><svg class="i dl"><use href="#i-dl"/></svg></button>
+        <button class="act" data-rk="keduanya"><span class="ic"><svg class="i"><use href="#i-file"/></svg></span><span class="t"><b>Rincian + Kwitansi</b><small>Berurutan per berkas</small></span><svg class="i dl"><use href="#i-dl"/></svg></button>
+      </div>
+      <div class="sub" style="margin-top:18px">Per berkas</div>
+      <div class="spdlist blist" id="kwPer"></div>
+    </div>
+  </div>
+</aside>
+</div>
+</section>
+
 <section class="view" id="v-peg">
   <div class="card">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><div><h2>Data Pegawai</h2><p>NIP, pangkat, dan jabatan dipakai otomatis di SPT, SPD, dan LPD. Baris kuning = data belum lengkap.</p></div><span class="rt badge" id="pegCount"></span></div>
@@ -428,7 +544,26 @@ table.peg tr.miss td{background:#fffaf0}
       </div></div>
     </div>
     <div class="card">
-      <div class="ch"><div class="ic"><svg class="i"><use href="#i-map"/></svg></div><div><h2>Kop Surat (SPD &amp; LPD)</h2><p>Seperti kop surat dinas: logo kiri, teks rata tengah, garis tebal di bawah. Baris kosong tidak dicetak.</p></div></div>
+      <div class="ch"><div class="ic"><svg class="i"><use href="#i-calc"/></svg></div><div><h2>Rincian &amp; Kwitansi</h2><p>Pejabat, akun, nomor bukti, dan tarif bawaan</p></div></div>
+      <div class="cb"><div class="grid">
+        <div class="f"><label>Bendahara Pengeluaran</label><select data-s="rk.bendahara" data-pegsel="1"></select></div>
+        <div class="f"><label>Pejabat Pembuat Komitmen</label><select data-s="rk.ppk" data-pegsel="1"></select></div>
+        <div class="f"><label>Satker (kwitansi)</label><input data-s="rk.satker"></div>
+        <div class="f"><label>Penanggungjawab Kegiatan</label><input data-s="rk.penanggungjawab"></div>
+        <div class="f"><label>Akun uang harian</label><input data-s="rk.akunHarian"></div>
+        <div class="f"><label>Akun transport</label><input data-s="rk.akunTransport"></div>
+        <div class="f"><label>Akhiran nomor bukti (harian)</label><input data-s="rk.suffixBukti"></div>
+        <div class="f"><label>Akhiran nomor bukti (transport)</label><input data-s="rk.suffixBuktiTransport"></div>
+        <div class="f"><label>Uang harian Biasa</label><div class="mini pre"><span>Rp</span><input type="number" data-s="rk.tarif.biasa"></div></div>
+        <div class="f"><label>Uang harian Fullboard</label><div class="mini pre"><span>Rp</span><input type="number" data-s="rk.tarif.fullboard"></div></div>
+        <div class="f"><label>Uang harian Fullday</label><div class="mini pre"><span>Rp</span><input type="number" data-s="rk.tarif.fullday"></div></div>
+        <div class="f"><label>Uang harian Driver</label><div class="mini pre"><span>Rp</span><input type="number" data-s="rk.tarif.driver"></div></div>
+        <div class="f"><label>Penginapan per kamar/malam</label><div class="mini pre"><span>Rp</span><input type="number" data-s="rk.tarif.inap"></div></div>
+        <div class="f"><label>Harga BBM per liter</label><div class="mini pre"><span>Rp</span><input type="number" data-s="rk.tarif.bbm"></div></div>
+      </div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ic"><svg class="i"><use href="#i-map"/></svg></div><div><h2>Kop Surat (SPD, LPD &amp; Rincian)</h2><p>Seperti kop surat dinas: logo kiri, teks rata tengah, garis tebal di bawah. Baris kosong tidak dicetak.</p></div></div>
       <div class="cb"><div class="grid">
         <div class="f"><label>Baris 1</label><input data-s="kop.baris1"></div>
         <div class="f"><label>Baris 2</label><input data-s="kop.baris2"></div>
@@ -436,7 +571,7 @@ table.peg tr.miss td{background:#fffaf0}
         <div class="f"><label>Telepon</label><input data-s="kop.telp"></div>
         <div class="f"><label>Email</label><input data-s="kop.email"></div>
         <div class="f"><label>Laman <span class="opt">opsional</span></label><input data-s="kop.laman"></div>
-        <div class="f"><div class="grid" style="gap:10px"><div><label class="lbl">Huruf</label><input data-s="kop.font"></div><div><label class="lbl">Ukuran</label><div class="addon"><input type="number" min="8" max="16" data-s="kop.ukuran"><span class="tag">pt</span></div></div></div>
+        <div class="f"><div class="grid" style="gap:10px"><div><label class="lbl">Huruf</label><input data-s="kop.font"></div><div><label class="lbl">Ukuran</label><div class="addon"><input type="number" min="8" max="16" data-s="kop.ukuran"><span class="tag">pt</span></div></div><div><label class="lbl">Ukuran telp/email</label><div class="addon"><input type="number" min="7" max="16" data-s="kop.ukuranKontak"><span class="tag">pt</span></div></div></div>
           <label class="chk"><input type="checkbox" data-s="kop.bold"> Baris 1 &amp; 2 cetak tebal</label></div>
       </div>
       <div class="tbar" style="margin:16px 0 0"><span class="sp"></span><button class="btn sm x" id="setDef">Kembalikan pengaturan bawaan</button></div>
@@ -30662,9 +30797,16 @@ MAX: 9026 };
       baris1: 'KOMISI PEMILIHAN UMUM', baris2: 'KABUPATEN PACITAN',
       alamat: 'Alamat Jl. Veteran No. 66 Pacitan',
       telp: 'Telp: (0357) 881122', email: 'Email: kab_pacitan@kpu.go.id', laman: '',
-      font: 'Tahoma', ukuran: 12, bold: false,
+      font: 'Tahoma', ukuran: 12, ukuranKontak: 11, bold: false,
     },
     jarakBawahCm: 2,
+    rk: {
+      bendahara: 'Toni Cahyo Nugroho', ppk: 'Haning Wahyu Puspitasari',
+      satker: '657825 - KPU KABUPATEN PACITAN', satkerNama: 'KPU KABUPATEN PACITAN', penanggungjawab: 'KPU Kabupaten Pacitan',
+      akunHarian: '3360.EBA.994.002.TD - 524111', akunTransport: '3360.EBA.994.002.OA - 523121',
+      suffixBukti: '/K/3501/{TAHUN}', suffixBuktiTransport: '/K/HBH/3501/{TAHUN}',
+      tarif: { biasa: 300000, fullboard: 130000, fullday: 95000, driver: 250000, inap: 458000, bbm: 25200 },
+    },
   };
   const CONTOH = {
     nomor: '16',
@@ -30738,7 +30880,7 @@ MAX: 9026 };
       spt2: { nama: s2.nama, jabatan: form.jabSPT2 || s2.jabatan, status: form.statusSPT2 || '' },
       spd: { nama: form.ttdSPD || '', status: form.statusSPD || '', ppkLengkap: form.ppkLengkap || form.ttdSPD || '' },
       timLPD: kom.concat(sek).concat(set.pengikutDiLPD ? pengikut : []),
-      find,
+      find, form,
     };
   }
 
@@ -30804,12 +30946,12 @@ MAX: 9026 };
     const o = { size: (Number(k.ukuran) || 12) * 2, font: k.font || 'Tahoma', al: 'C', line: 276 };
     const bawah = { top: NB, left: NB, right: NB, bottom: { style: BorderStyle.SINGLE, size: 24, color: '000000' } };
     const z = { top: 0, bottom: 0, left: 0, right: 0 };
-    const kontak = [k.telp, k.email, k.laman].filter((x) => x && String(x).trim()).join('        ');
+    const kontak = [k.telp, k.email, k.laman].filter((x) => x && String(x).trim()).join('\u00A0'.repeat(14));
     const teks = [[k.baris1, 1], [k.baris2, 1], [k.alamat, 0], [kontak, 0]].filter(([x]) => x && String(x).trim());
     return [
       T([R([
         C(new Paragraph({ children: [logoRun(logo, 92)], spacing: { after: 60 } }), { w: lw, va: 'c', borders: bawah, m: z }),
-        C(teks.map(([t, nama], i) => P(t, { ...o, bold: !!nama && !!k.bold, after: i === teks.length - 1 ? 60 : 0 })), { w: tw, va: 'c', borders: bawah, m: z }),
+        C(teks.map(([t, nama], i) => P(t, { ...o, bold: !!nama && !!k.bold, size: t === kontak ? (Number(k.ukuranKontak) || 11) * 2 : o.size, after: i === teks.length - 1 ? 60 : 0 })), { w: tw, va: 'c', borders: bawah, m: z }),
       ])], [lw, tw]),
       P('', { size: 12 }),
     ];
@@ -31147,12 +31289,178 @@ MAX: 9026 };
       sections,
     });
   }
+  /* ================= RINCIAN & KWITANSI ================= */
+  const SATUAN = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
+  function terbilang(n){
+    n = Math.floor(Math.abs(Number(n) || 0));
+    const t = (x) => {
+      if (x < 12) return SATUAN[x];
+      if (x < 20) return t(x - 10) + ' Belas';
+      if (x < 100) return t(Math.floor(x / 10)) + ' Puluh' + (x % 10 ? ' ' + t(x % 10) : '');
+      if (x < 200) return 'Seratus' + (x - 100 ? ' ' + t(x - 100) : '');
+      if (x < 1000) return t(Math.floor(x / 100)) + ' Ratus' + (x % 100 ? ' ' + t(x % 100) : '');
+      if (x < 2000) return 'Seribu' + (x - 1000 ? ' ' + t(x - 1000) : '');
+      if (x < 1e6) return t(Math.floor(x / 1000)) + ' Ribu' + (x % 1000 ? ' ' + t(x % 1000) : '');
+      if (x < 1e9) return t(Math.floor(x / 1e6)) + ' Juta' + (x % 1e6 ? ' ' + t(x % 1e6) : '');
+      if (x < 1e12) return t(Math.floor(x / 1e9)) + ' Miliar' + (x % 1e9 ? ' ' + t(x % 1e9) : '');
+      return t(Math.floor(x / 1e12)) + ' Triliun' + (x % 1e12 ? ' ' + t(x % 1e12) : '');
+    };
+    return n === 0 ? 'Nol Rupiah' : t(n).replace(/\s+/g, ' ').trim() + ' Rupiah';
+  }
+  const rp = (n) => (Math.round(Number(n) || 0)).toLocaleString('id-ID');
+  const num = (v) => Number(v) || 0;
+  /* Hitung satu baris rincian: uraian, keterangan, jumlah */
+  function itemCalc(it){
+    switch (it.t) {
+      case 'harian': return { uraian: String(it.nama || '').toUpperCase(), ket: `(${num(it.hari)} Hari ${it.jenis || 'Biasa'} x Rp ${rp(it.tarif)},-)`, jumlah: num(it.hari) * num(it.tarif) };
+      case 'inap': return { uraian: `${num(it.kamar)} Kamar ${num(it.malam)} Malam`, ket: `(${num(it.kamar)} Kamar x ${num(it.malam)} Malam x Rp ${rp(it.tarif)},-)`, jumlah: num(it.kamar) * num(it.malam) * num(it.tarif) };
+      case 'bbm': return { uraian: it.label || 'BBM', ket: `= ${num(it.liter)} Liter x Rp ${rp(it.harga)},-`, jumlah: num(it.liter) * num(it.harga) };
+      default: return { uraian: it.label || '', ket: it.ket || '', jumlah: num(it.jumlah) };
+    }
+  }
+  function berkasTotal(b){ return (b.groups || []).reduce((a, g) => a + (g.items || []).reduce((x, it) => x + itemCalc(it).jumlah, 0), 0); }
+  const BULAN_RK = BULAN;
+  function blnThn(s){ const d = toDate(s); return d ? BULAN_RK[d.getMonth()] + ' ' + d.getFullYear() : ''; }
+  // tanggal pembayaran: jika diisi → lengkap; jika kosong → hari dikosongkan (diisi tangan)
+  function tglBayar(ctx, rk){ return rk.tglBayar ? fTgl(rk.tglBayar).replace(/^0/, '') : '        ' + blnThn(ctx.form.tglPulang || ctx.form.tglDisahkan); }
+  function bulanBayar(ctx, rk){ return rk.tglBayar ? blnThn(rk.tglBayar) : blnThn(ctx.form.tglPulang || ctx.form.tglDisahkan); }
+  function untukBayar(ctx, b){ return (b.untuk && b.untuk.trim()) ? b.untuk : ((b.prefix ? b.prefix + ' ' : '') + ctx.uraian); }
+  function nipOf(ctx, nama){ const p = ctx.find(nama); return emptyish(p.nip) ? '' : p.nip; }
+  const UL = (t, o = {}) => P([{ t, b: true, u: true }], { al: 'C', size: o.size || 20, ...o });
+
+  function rincianSection(ctx, logo, rk, b){
+    const SZ = 18, set = ctx.set, r = set.rk || {};
+    const w = [520, 230, 2600, 3000, 380, 1250, 970, 972];
+    const sb = SB(6);
+    const vb = (o = {}) => ({ left: sb, right: sb, top: o.t ? sb : NB, bottom: o.b ? sb : NB });
+    const m = { top: 30, bottom: 30, left: 60, right: 60 };
+    const cell = (t, wi, o = {}) => C(P(t, { size: o.size || SZ, bold: o.bold, al: o.al, italics: o.it }), { w: wi, span: o.span, borders: o.bd || vb(), m, va: o.va || 'c' });
+    const rows = [];
+    rows.push(R([
+      cell('NO.', w[0], { bold: true, al: 'C', bd: vb({ t: 1, b: 1 }) }),
+      cell('PERINCIAN  BIAYA', w[1] + w[2] + w[3], { span: 3, bold: true, al: 'C', bd: vb({ t: 1, b: 1 }) }),
+      cell('JUMLAH', w[4] + w[5], { span: 2, bold: true, al: 'C', bd: vb({ t: 1, b: 1 }) }),
+      cell('TANDA TANGAN', w[6] + w[7], { span: 2, bold: true, al: 'C', bd: vb({ t: 1, b: 1 }) }),
+    ], { h: 420 }));
+    const blankRow = (h) => R([0, 1, 2, 3, 4, 5, 6, 7].map((i) => C(P('', { size: 8 }), { w: w[i], borders: i >= 1 && i <= 2 ? { left: i === 1 ? sb : NB, right: NB, top: NB, bottom: NB } : i === 3 ? { left: NB, right: sb, top: NB, bottom: NB } : i === 4 ? { left: sb, right: NB, top: NB, bottom: NB } : i === 5 ? { left: NB, right: sb, top: NB, bottom: NB } : vb(), m: { top: 0, bottom: 0, left: 0, right: 0 } })), { h, exact: true });
+    // sel tanpa garis vertikal internal pada kolom perincian (dash|nama|ket) dan jumlah (Rp|angka)
+    const bIn = (i) => (i === 1 ? { left: sb, right: NB, top: NB, bottom: NB } : i === 2 ? NONE4 : i === 3 ? { left: NB, right: sb, top: NB, bottom: NB } : i === 4 ? { left: sb, right: NB, top: NB, bottom: NB } : i === 5 ? { left: NB, right: sb, top: NB, bottom: NB } : vb());
+    rows.push(blankRow(120));
+    let total = 0;
+    (b.groups || []).forEach((g, gi) => {
+      rows.push(R([
+        cell((gi + 1) + '.', w[0], { bold: true, al: 'C' }),
+        C(P(g.judul || '', { size: SZ, bold: true }), { w: w[1] + w[2] + w[3], span: 3, borders: vb(), m }),
+        C(P(''), { w: w[4], borders: bIn(4), m }), C(P(''), { w: w[5], borders: bIn(5), m }),
+        C(P(''), { w: w[6], borders: vb(), m }), C(P(''), { w: w[7], borders: vb(), m }),
+      ]));
+      let k = 0;
+      const anyHarian = (g.items || []).some((it) => it.t === 'harian');
+      (g.items || []).forEach((it, ii) => {
+        const c = itemCalc(it); total += c.jumlah;
+        let no = '';
+        if (it.t === 'harian') no = String(++k);
+        else if (!anyHarian && (it.t === 'bbm' || it.t === 'nom') && ii === 0 && g.ttd !== false) no = '1';
+        const kiri = no && Number(no) % 2 === 1;
+        rows.push(R([
+          C(P(''), { w: w[0], borders: vb(), m }),
+          C(P('-', { size: SZ }), { w: w[1], borders: bIn(1), m }),
+          C(P(c.uraian, { size: SZ }), { w: w[2], borders: bIn(2), m }),
+          C(P(c.ket, { size: SZ }), { w: w[3], borders: bIn(3), m }),
+          C(P('Rp', { size: SZ }), { w: w[4], borders: bIn(4), m }),
+          C(P(rp(c.jumlah), { size: SZ, al: 'R' }), { w: w[5], borders: bIn(5), m }),
+          C(P(no && kiri ? no + '.' : '', { size: SZ }), { w: w[6], borders: vb(), m }),
+          C(P(no && !kiri ? no + '.' : '', { size: SZ }), { w: w[7], borders: vb(), m }),
+        ], { h: 300 }));
+      });
+      rows.push(blankRow(200));
+    });
+    // pengisi agar tabel tidak terlalu pendek
+    const nRows = (b.groups || []).reduce((a, g) => a + 2 + (g.items || []).length, 0);
+    if (nRows < 12) rows.push(blankRow((12 - nRows) * 300));
+    total = Math.round(total);
+    rows.push(R([
+      C(P(''), { w: w[0], borders: vb({ t: 1, b: 1 }), m }),
+      C(P(''), { w: w[1] + w[2] + w[3], span: 3, borders: vb({ t: 1, b: 1 }), m }),
+      C(P('Rp', { size: SZ, bold: true }), { w: w[4], borders: { left: sb, right: NB, top: sb, bottom: sb }, m, va: 'c' }),
+      C(P(rp(total), { size: SZ, bold: true, al: 'R' }), { w: w[5], borders: { left: NB, right: sb, top: sb, bottom: sb }, m, va: 'c' }),
+      C(P(b.akun || '', { size: 15, italics: true }), { w: w[6] + w[7], span: 2, borders: vb({ t: 1, b: 1 }), m, va: 'c' }),
+    ], { h: 380 }));
+    rows.push(R([C(P([{ t: 'Terbilang :   ', b: true }, { t: terbilang(total), b: true, i: true }], { size: SZ }), { w: W, span: 8, borders: ALL(6), m: { top: 80, bottom: 80, left: 60, right: 60 }, va: 'c' })], { h: 480 }));
+    const tabel = T(rows, w);
+
+    // tanda tangan
+    const pen = ctx.find(b.penerima), ben = ctx.find(r.bendahara), ppk = ctx.find(r.ppk);
+    const half = Math.floor(W / 2);
+    const nipL = (p) => P(emptyish(p.nip) ? '' : 'NIP. ' + p.nip, { size: SZ, al: 'C' });
+    const ttd = T([R([
+      C([P('', { size: SZ }), P('Telah dibayar sejumlah :', { size: SZ }), P([{ t: 'Rp   ' }, { t: rp(total), b: true }], { size: SZ, indent: { left: 400 } }),
+        P('BENDAHARA PENGELUARAN', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(ben.nama || '').toUpperCase(), { size: SZ }), nipL(ben)], { w: half }),
+      C([P('Pacitan, ' + tglBayar(ctx, rk), { size: SZ }), P('Telah menerima jumlah uang sebesar :', { size: SZ }), P([{ t: 'Rp   ' }, { t: rp(total), b: true }], { size: SZ, indent: { left: 400 } }),
+        P('YANG  MENERIMA', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(pen.nama || '').toUpperCase(), { size: SZ }), nipL(pen)], { w: W - half }),
+    ])], [half, W - half]);
+    const kv = (k, v) => P(k + '\t:\tRp\t' + v, { size: SZ, tabs: [{ type: TabStopType.LEFT, position: 4300 }, { type: TabStopType.LEFT, position: 5000 }, { type: TabStopType.RIGHT, position: 6900 }] });
+    const ppkBlok = T([R([C('', { w: half }), C([P('PEJABAT PEMBUAT KOMITMEN', { size: SZ, bold: true, al: 'C' }), ...blank(3, SZ), UL(String(ppk.nama || '').toUpperCase(), { size: SZ }), nipL(ppk)], { w: W - half })])], [half, W - half]);
+    return {
+      properties: { page: PAGE },
+      children: [...kop(ctx, logo),
+        P('RINCIAN PERTANGGUNGJAWABAN PERJALANAN DINAS', { size: 24, bold: true, al: 'C', before: 120, after: 200 }),
+        ...[['Nomor Surat Tugas', ctx.nomor, true], ['Tanggal Surat Tugas', ctx.tglDisahkan, true], ['Penanggungjawab Kegiatan', r.penanggungjawab || 'KPU Kabupaten Pacitan', false]]
+          .map(([k, v, bo]) => P([k + '\t:\t', { t: v, b: bo }], { size: 20, tabs: [{ type: TabStopType.LEFT, position: 2600 }, { type: TabStopType.LEFT, position: 2850 }] })),
+        P('', { size: 10, after: 120 }), tabel, P('', { size: SZ, after: 120 }), ttd,
+        P('', { size: 8, after: 120, border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: '000000', space: 4 } } }),
+        kv('Ditetapkan sejumlah', rp(total)), kv('Yang telah dibayar semula', '-'), kv('Sisa Kurang / Lebih', rp(total)),
+        P('', { size: SZ, after: 120 }), ppkBlok],
+    };
+  }
+
+  function kwitansiSection(ctx, rk, b){
+    const SZ = 20, set = ctx.set, r = set.rk || {};
+    const total = Math.round(berkasTotal(b));
+    const pen = ctx.find(b.penerima), ben = ctx.find(r.bendahara), ppk = ctx.find(r.ppk);
+    const tpl = (s) => String(s || '').replace(/\{TAHUN\}/g, ctx.tahun);
+    const noBukti = (b.noBukti ? b.noBukti : '            ') + tpl(b.suffix || r.suffixBukti || '/K/3501/{TAHUN}');
+    // blok kanan atas
+    const iw = [1750, 250, 3900], lw = W - iw.reduce((a, x) => a + x, 0);
+    const info = [['Tahun Anggaran', { t: ctx.tahun, b: true }], ['Nomor Bukti', noBukti], ['Akun', b.akun || ''], ['Kepada', { t: String(pen.nama || '').toUpperCase(), b: true }], ['Satker', r.satker || '']];
+    const infoT = T(info.map(([k, v]) => R([C('', { w: lw }), C(P(k, { size: SZ }), { w: iw[0] }), C(P(':', { size: SZ }), { w: iw[1] }), C(P([v], { size: SZ }), { w: iw[2] })])), [lw, ...iw]);
+    // isi
+    const g = [2100, 300]; g.push(W - g[0] - g[1]);
+    const row = (k, ch, o = {}) => R([C(P(k, { size: SZ }), { w: g[0] }), C(P(k ? ':' : '', { size: SZ }), { w: g[1] }), C(Array.isArray(ch) ? ch : [ch], { w: g[2] })], { h: o.h });
+    const sp = () => R([C(P('', { size: 8 }), { w: W, span: 3 })], { h: 140, exact: true });
+    const isi = T([
+      row('Sudah Terima Dari', [P('Pejabat Pembuat Komitmen', { size: SZ }), P('Satker ' + String(r.satkerNama || 'KPU KABUPATEN PACITAN'), { size: SZ })]), sp(),
+      row('Jumlah Uang', P([{ t: 'Rp.   ' }, { t: rp(total) + ',00', b: true, i: true }], { size: SZ })), sp(),
+      row('Terbilang', P([{ t: terbilang(total), i: true }], { size: SZ })), sp(),
+      row('Kuitansi Supplier', P(b.supplier || '', { size: SZ })), sp(),
+      row('Untuk Pembayaran', [P(untukBayar(ctx, b), { size: SZ, al: 'J' }), P('', { size: SZ }), P('(Daftar Penerimaan Terlampir)', { size: SZ })]),
+    ], g);
+    const half = Math.floor(W / 2);
+    const nipL = (p) => P(emptyish(p.nip) ? '' : 'NIP. ' + p.nip, { size: SZ, al: 'C' });
+    const terima = T([R([C('', { w: half }), C([P('Pacitan, ' + tglBayar(ctx, rk), { size: SZ, al: 'C' }), P('PENERIMA UANG', { size: SZ, al: 'C' }), ...blank(3, SZ), P(String(pen.nama || '').toUpperCase(), { size: 22, bold: true, al: 'C' })], { w: W - half })])], [half, W - half]);
+    const garis = (after = 120) => P('', { size: 6, after, border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: '000000', space: 2 } } });
+    const ttd = T([R([
+      C([P('an. Kuasa Pengguna Anggaran', { size: SZ, al: 'C' }), P('Pejabat Pembuat Komitmen', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(ppk.nama || '').toUpperCase(), { size: 22 }), nipL(ppk)], { w: half }),
+      C([P('Lunas Dibayar,  ' + bulanBayar(ctx, rk), { size: SZ, al: 'C' }), P('Bendahara Pengeluaran', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(ben.nama || '').toUpperCase(), { size: 22 }), nipL(ben)], { w: W - half }),
+    ])], [half, W - half]);
+    return {
+      properties: { page: PAGE },
+      children: [infoT, P('', { size: SZ, after: 200 }),
+        P('Kuitansi/Bukti Pembayaran', { size: 28, bold: true, al: 'C', after: 240 }),
+        isi, P('', { size: SZ, after: 160 }), terima, P('', { size: SZ }), garis(160), ttd, P('', { size: SZ }), garis(0)],
+    };
+  }
+
   const API = {
     buildContext, fTgl, fHariTgl,
     spt: (ctx, logo, jenis) => makeDoc([sptSection(ctx, logo, jenis)]),
     spd: (ctx, logo, orangList, withBack) => makeDoc(orangList.flatMap((o) => (withBack ? [spdSection(ctx, logo, o), spdbSection(ctx)] : [spdSection(ctx, logo, o)]))),
     spdb: (ctx) => makeDoc([spdbSection(ctx)]),
     lpd: (ctx, logo, fotos) => makeDoc([lpdSection(ctx, logo, fotos)]),
+    rincian: (ctx, logo, rk, list) => makeDoc(list.map((b) => rincianSection(ctx, logo, rk, b))),
+    kwitansi: (ctx, rk, list) => makeDoc(list.map((b) => kwitansiSection(ctx, rk, b))),
+    rincianKwitansi: (ctx, logo, rk, list) => makeDoc(list.flatMap((b) => [rincianSection(ctx, logo, rk, b), kwitansiSection(ctx, rk, b)])),
+    terbilang, itemCalc, berkasTotal, rp, untukBayar,
     toBlob: (doc) => Packer.toBlob(doc),
     toBuffer: (doc) => Packer.toBuffer(doc),
   };
@@ -31184,13 +31492,14 @@ function emptyForm(){ const f = clone(D.CONTOH);
 function load(){
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
-  S = { form: emptyForm(), formVer: 2, pegawai: clone(D.PEGAWAI), pegVer: D.PEGAWAI_VER, settings: clone(D.SETTINGS) };
+  S = { form: emptyForm(), rk: { tglBayar: '', berkas: [] }, formVer: 2, pegawai: clone(D.PEGAWAI), pegVer: D.PEGAWAI_VER, settings: clone(D.SETTINGS) };
   if (saved) {
     if (saved.form) {
       // isian contoh dari versi sebelumnya (belum pernah diubah) → mulai dari form kosong
       const masihContoh = saved.form.uraian === D.CONTOH.uraian && String(saved.form.nomor) === String(D.CONTOH.nomor) && !saved.formVer;
       S.form = masihContoh ? emptyForm() : Object.assign(emptyForm(), saved.form);
     }
+    if (saved.rk && Array.isArray(saved.rk.berkas)) S.rk = saved.rk;
     if (Array.isArray(saved.pegawai) && saved.pegawai.length) {
       if (saved.pegVer === D.PEGAWAI_VER) S.pegawai = saved.pegawai;
       else { // data pegawai bawaan diperbarui: pakai data baru, pertahankan NIP yang sudah Anda isi
@@ -31201,6 +31510,8 @@ function load(){
     if (saved.settings) {
       const kopLama = saved.settings.kopVer !== D.SETTINGS.kopVer;
       S.settings = Object.assign(clone(D.SETTINGS), saved.settings, { kopVer: D.SETTINGS.kopVer, kop: kopLama ? clone(D.SETTINGS.kop) : Object.assign(clone(D.SETTINGS.kop), saved.settings.kop || {}) });
+      const rk0 = clone(D.SETTINGS.rk), rkS = saved.settings.rk || {};
+      S.settings.rk = Object.assign(rk0, rkS, { tarif: Object.assign(rk0.tarif, rkS.tarif || {}) });
     }
   }
   normForm(S.form);
@@ -31226,7 +31537,7 @@ function hl(t, q){ if (!q) return esc(t); const i = t.toLowerCase().indexOf(q); 
 $$('nav.tabs button').forEach((b) => b.onclick = () => {
   $$('nav.tabs button').forEach((x) => x.classList.toggle('on', x === b));
   $$('.view').forEach((v) => v.classList.toggle('on', v.id === 'v-' + b.dataset.v));
-  if (b.dataset.v === 'form') renderForm(); if (b.dataset.v === 'peg') renderPeg(); if (b.dataset.v === 'set') renderSet();
+  if (b.dataset.v === 'form') renderForm(); if (b.dataset.v === 'peg') renderPeg(); if (b.dataset.v === 'set') renderSet(); if (b.dataset.v === 'rk') renderRK(); if (b.dataset.v === 'kw') renderKW();
   window.scrollTo(0, 0);
 });
 
@@ -31438,6 +31749,180 @@ $('#fotos').addEventListener('click', (e) => {
   if (d) { const [f] = FOTO.splice(+d.dataset.fdel, 1); IDB.del(f.id); URL.revokeObjectURL(thumbs.get(f.id)); thumbs.delete(f.id); persistOrder(); renderFoto(); }
 });
 
+
+/* =================== RINCIAN SPPD & KWITANSI =================== */
+const RKT = { harian: 'Uang harian', inap: 'Penginapan', bbm: 'BBM', nom: 'Nominal' };
+const tarif = () => S.settings.rk.tarif;
+const uid = () => Math.random().toString(36).slice(2, 9);
+function newItem(t, extra = {}){
+  const tf = tarif(), lama = Number(S.form.lama) || 1;
+  if (t === 'harian') return { t, nama: '', hari: lama, jenis: 'Biasa', tarif: tf.biasa, ...extra };
+  if (t === 'inap') return { t, kamar: 1, malam: Math.max(1, lama - 1), tarif: tf.inap, ...extra };
+  if (t === 'bbm') return { t, label: 'BBM', liter: 0, harga: tf.bbm, ...extra };
+  return { t: 'nom', label: '', jumlah: 0, ket: '', ...extra };
+}
+function presetBerkas(kind){
+  const r = S.settings.rk, c = ctx(), tf = tarif(), lama = Number(S.form.lama) || 1;
+  const orang = c.kom.concat(c.sek).concat(c.pengikut.filter((p) => p.ket !== 'Pengemudi'));
+  const driver = c.pengikut.find((p) => p.ket === 'Pengemudi');
+  const penerima1 = (c.sek[0] || c.kom[0] || {}).nama || '';
+  if (kind === 'harian') {
+    const groups = [{ judul: 'Uang Harian Komisioner/ASN (Biasa)', items: orang.map((p) => newItem('harian', { nama: p.nama })) }];
+    if (!groups[0].items.length) groups[0].items.push(newItem('harian'));
+    if (driver) groups.push({ judul: 'Uang Harian Driver (Biasa)', items: [newItem('harian', { nama: driver.nama, tarif: tf.driver })] });
+    if (lama > 1) groups.push({ judul: 'Penginapan', items: [newItem('inap', { kamar: Math.max(1, Math.ceil((orang.length + (driver ? 1 : 0)) / 2)), malam: lama - 1 })] });
+    return { id: uid(), nama: 'Uang Harian & Penginapan', akun: r.akunHarian, penerima: penerima1, prefix: 'Uang Harian', suffix: r.suffixBukti, noBukti: '', untuk: '', supplier: '', groups };
+  }
+  const pen = (driver || c.sek[0] || c.kom[0] || {}).nama || '';
+  if (kind === 'bbm') return { id: uid(), nama: 'Transport PP (BBM)', akun: r.akunTransport, penerima: pen, prefix: 'BBM PP (Pulang Pergi) atas', suffix: r.suffixBuktiTransport, noBukti: '', untuk: '', supplier: '',
+    groups: [{ judul: 'Transport PP', items: [newItem('bbm', { label: 'BBM 1' }), newItem('bbm', { label: 'BBM 2' })] }] };
+  if (kind === 'tol') return { id: uid(), nama: 'Tol PP', akun: r.akunTransport, penerima: pen, prefix: 'Tol PP (Pulang Pergi) atas', suffix: r.suffixBuktiTransport, noBukti: '', untuk: '', supplier: '',
+    groups: [{ judul: 'Tol PP', items: [newItem('nom', { label: 'Tol 1' }), newItem('nom', { label: 'Tol 2' })] }] };
+  return { id: uid(), nama: 'Berkas baru', akun: r.akunHarian, penerima: penerima1, prefix: '', suffix: r.suffixBukti, noBukti: '', untuk: '', supplier: '', groups: [{ judul: 'Rincian biaya', items: [newItem('nom')] }] };
+}
+const rpx = (n) => 'Rp ' + G.rp(n);
+function pegOpts(val){ const list = S.pegawai.filter((p) => p.nama);
+  return `<option value="">— Pilih nama —</option>` + (val && !list.some((p) => p.nama === val) ? `<option selected>${esc(val)}</option>` : '') +
+    list.map((p) => `<option value="${esc(p.nama)}"${p.nama === val ? ' selected' : ''}>${esc(p.nama)}</option>`).join(''); }
+const numIn = (path, v, suf, pre) => `<div class="mini${pre ? ' pre' : ''}"><span>${pre || suf}</span><input type="number" min="0" data-rkp="${path}" value="${esc(v ?? '')}"></div>`;
+function itemFields(it, p){
+  if (it.t === 'harian') return `<select class="wide" data-rkp="${p}.nama">${pegOpts(it.nama)}</select>${numIn(p + '.hari', it.hari, 'hari')}
+    <select data-rkp="${p}.jenis">${['Biasa', 'Fullboard', 'Fullday'].map((j) => `<option${j === it.jenis ? ' selected' : ''}>${j}</option>`).join('')}</select>${numIn(p + '.tarif', it.tarif, '', 'Rp')}`;
+  if (it.t === 'inap') return `${numIn(p + '.kamar', it.kamar, 'kamar')}${numIn(p + '.malam', it.malam, 'malam')}${numIn(p + '.tarif', it.tarif, '', 'Rp')}`;
+  if (it.t === 'bbm') return `<input data-rkp="${p}.label" value="${esc(it.label)}" placeholder="Nama (mis. BBM 1)">${numIn(p + '.liter', it.liter, 'liter')}${numIn(p + '.harga', it.harga, '', 'Rp')}`;
+  return `<input class="wide" data-rkp="${p}.label" value="${esc(it.label)}" placeholder="Uraian (mis. Tol 1)">${numIn(p + '.jumlah', it.jumlah, '', 'Rp')}<input data-rkp="${p}.ket" value="${esc(it.ket || '')}" placeholder="Keterangan (opsional)">`;
+}
+function renderBerkas(b, bi){
+  const tot = G.berkasTotal(b);
+  return `<div class="card bk" data-bi="${bi}">
+    <div class="ch"><div class="no">${bi + 1}</div><input class="bn" data-rkp="${bi}.nama" value="${esc(b.nama)}" aria-label="Nama berkas">
+      <div class="tot2"><b data-tot="${bi}">${rpx(tot)}</b><small>Total berkas</small></div>
+      <button class="btn sm x" data-bkdel="${bi}" title="Hapus berkas">Hapus</button></div>
+    <div class="cb">
+      <div class="grid">
+        <div class="f"><label>Akun</label><input data-rkp="${bi}.akun" value="${esc(b.akun)}" list="dlAkun"></div>
+        <div class="f"><label>Yang menerima uang</label><select data-rkp="${bi}.penerima">${pegOpts(b.penerima)}</select></div>
+      </div>
+      ${(b.groups || []).map((g, gi) => `<div class="grp">
+        <div class="grp-h"><span class="gn">${gi + 1}</span><input data-rkp="${bi}.groups.${gi}.judul" value="${esc(g.judul)}" placeholder="Judul kelompok (mis. Uang Harian Driver)"><button class="rm" data-gdel="${bi}.${gi}" title="Hapus kelompok">×</button></div>
+        ${(g.items || []).map((it, ii) => { const p = `${bi}.groups.${gi}.items.${ii}`, c = G.itemCalc(it);
+          return `<div class="rit"><select class="ty" data-rktype="${p}">${Object.entries(RKT).map(([k, v]) => `<option value="${k}"${k === it.t ? ' selected' : ''}>${v}</option>`).join('')}</select>
+            <div class="fl">${itemFields(it, p)}</div>
+            <div class="amt" data-amt="${p}">${rpx(c.jumlah)}<small>${esc(c.ket)}</small></div>
+            <button class="rm" data-idel="${p}" title="Hapus baris">×</button></div>`; }).join('')}
+        <button class="btn sm add" data-iadd="${bi}.${gi}">+ Tambah baris</button>
+      </div>`).join('')}
+      <button class="btn sm add" data-gadd="${bi}" style="margin-top:12px">+ Tambah kelompok</button>
+      <div class="tb">Terbilang: <i data-tb="${bi}">${esc(G.terbilang(tot))}</i></div>
+    </div></div>`;
+}
+function rkSummary(){
+  const c = ctx(), B = S.rk.berkas, all = B.reduce((a, b) => a + G.berkasTotal(b), 0);
+  $('#rkSrc').textContent = c.nomor ? `Surat Tugas ${c.nomor} · ${c.tglDisahkan || 'tanggal belum diisi'}` : 'Isi Nomor SPT di Form SPPD terlebih dahulu';
+  $('#rkSum').innerHTML = [['Nomor ST', c.nomor || '-', 'w2'], ['Berkas', B.length], ['Total', rpx(all)]].map(([a, b, k]) => `<div class="${k || ''}"><span>${a}</span><b>${esc(b)}</b></div>`).join('');
+  const per = B.length ? B.map((b, i) => `<div class="it2"><span class="av" style="background:var(--brand)">${i + 1}</span><div class="nm">${esc(b.nama)}<small>${rpx(G.berkasTotal(b))} · ${esc(b.penerima || 'penerima belum dipilih')}</small></div>
+      <button class="btn sm" data-rk1="rincian" data-i="${i}" title="Rincian">R</button><button class="btn sm" data-rk1="kwitansi" data-i="${i}" title="Kwitansi">K</button></div>`).join('')
+    : '<div class="empty">Belum ada berkas.</div>';
+  $('#rkPer').innerHTML = per; $('#kwPer').innerHTML = per;
+  const w = [];
+  if (!c.nomor) w.push('Nomor SPT di Form SPPD belum diisi');
+  B.forEach((b, i) => { if (!b.penerima) w.push(`Berkas ${i + 1}: penerima belum dipilih`); if (!G.berkasTotal(b)) w.push(`Berkas ${i + 1}: jumlah masih 0`); });
+  $('#rkWarn').innerHTML = w.length ? `<div class="alert w"><ul>${w.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>` : '';
+}
+function renderRK(){
+  $('#rkTgl').value = S.rk.tglBayar || '';
+  $('#bkList').innerHTML = S.rk.berkas.length ? S.rk.berkas.map(renderBerkas).join('')
+    : `<div class="card" style="margin-bottom:18px"><div class="empty-st"><svg class="i"><use href="#i-calc"/></svg><b>Belum ada rincian</b>Klik <b style="display:inline">Susun otomatis dari Form SPPD</b> untuk membuat berkas dari pelaksana, lama perjalanan, dan tarif bawaan — lalu sesuaikan angkanya.</div></div>`;
+  if (!$('#dlAkun')) { const dl = document.createElement('datalist'); dl.id = 'dlAkun'; document.body.appendChild(dl); }
+  $('#dlAkun').innerHTML = [S.settings.rk.akunHarian, S.settings.rk.akunTransport].map((a) => `<option value="${esc(a)}">`).join('');
+  rkSummary();
+}
+// path helper: "0.groups.1.items.2.tarif"
+function rkGet(path){ return path.split('.').reduce((o, k) => o[k], S.rk.berkas); }
+function rkSet(path, v){ const ks = path.split('.'); const last = ks.pop(); ks.reduce((o, k) => o[k], S.rk.berkas)[last] = v; }
+function rkRefreshNums(){
+  S.rk.berkas.forEach((b, bi) => { const t = G.berkasTotal(b); const el = $(`[data-tot="${bi}"]`); if (el) el.textContent = rpx(t); const tb = $(`[data-tb="${bi}"]`); if (tb) tb.textContent = G.terbilang(t);
+    b.groups.forEach((g, gi) => g.items.forEach((it, ii) => { const a = $(`[data-amt="${bi}.groups.${gi}.items.${ii}"]`); if (a) { const c = G.itemCalc(it); a.innerHTML = rpx(c.jumlah) + `<small>${esc(c.ket)}</small>`; } })); });
+  rkSummary();
+}
+$('#bkList').addEventListener('input', (e) => { const el = e.target, p = el.dataset.rkp; if (!p) return;
+  let v = el.type === 'number' ? (el.value === '' ? '' : Number(el.value)) : el.value;
+  if (p.endsWith('.jenis')) { const it = rkGet(p.slice(0, -6)), tf = tarif(), map = { Biasa: tf.biasa, Fullboard: tf.fullboard, Fullday: tf.fullday };
+    if ([tf.biasa, tf.fullboard, tf.fullday].includes(Number(it.tarif))) { it.tarif = map[v]; const ti = $(`[data-rkp="${p.slice(0, -6)}.tarif"]`); if (ti) ti.value = it.tarif; } }
+  rkSet(p, v); save(); rkRefreshNums(); });
+$('#bkList').addEventListener('change', (e) => { const el = e.target;
+  if (el.dataset.rktype) { const p = el.dataset.rktype, old = rkGet(p); const keep = old.t === 'harian' ? {} : { label: old.label }; rkSet(p, newItem(el.value, el.value === 'harian' || el.value === 'inap' ? {} : keep)); save(); renderRK(); }
+  else if (el.dataset.rkp && el.tagName === 'SELECT') rkSummary(); });
+$('#bkList').addEventListener('click', async (e) => {
+  const t = e.target.closest('[data-bkdel],[data-gdel],[data-idel],[data-iadd],[data-gadd]'); if (!t) return;
+  const d = t.dataset;
+  if (d.bkdel != null) { if (!(await ask('Hapus berkas “' + S.rk.berkas[+d.bkdel].nama + '”?'))) return; S.rk.berkas.splice(+d.bkdel, 1); }
+  else if (d.gdel) { const [bi, gi] = d.gdel.split('.').map(Number); S.rk.berkas[bi].groups.splice(gi, 1); }
+  else if (d.idel) { const ks = d.idel.split('.'); const ii = +ks.pop(); ks.pop(); const g = rkGet(ks.join('.')); g.items.splice(ii, 1); }
+  else if (d.iadd) { const [bi, gi] = d.iadd.split('.').map(Number); const g = S.rk.berkas[bi].groups[gi]; const last = g.items[g.items.length - 1];
+    const n = newItem(last ? last.t : 'nom'); if (last && last.t === 'harian') { n.tarif = last.tarif; n.jenis = last.jenis; n.hari = last.hari; }
+    if (last && (last.t === 'bbm' || last.t === 'nom')) n.label = String(last.label || '').replace(/\d+$/, (m) => String(+m + 1)); g.items.push(n); }
+  else if (d.gadd != null) S.rk.berkas[+d.gadd].groups.push({ judul: '', items: [newItem('nom')] });
+  save(); renderRK();
+});
+$('#bkAdd').onclick = () => { S.rk.berkas.push(presetBerkas($('#bkPreset').value)); save(); renderRK(); setTimeout(() => { const l = $$('#bkList .bk'); l[l.length - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50); };
+$('#rkAuto').onclick = async () => {
+  const c = ctx();
+  if (!c.kom.length && !c.sek.length) return toast('Pilih pelaksana di Form SPPD terlebih dahulu', 1);
+  if (S.rk.berkas.length && !(await ask('Ganti semua berkas rincian dengan susunan otomatis dari Form SPPD?'))) return;
+  const B = [presetBerkas('harian')];
+  if (/dinas/i.test(S.form.kendaraan || '')) B.push(presetBerkas('bbm'), presetBerkas('tol'));
+  S.rk.berkas = B; save(); renderRK(); toast(B.length + ' berkas disusun — periksa tarif, liter BBM, dan biaya tol');
+};
+$('#rkTgl').addEventListener('input', (e) => { S.rk.tglBayar = e.target.value; save(); });
+
+/* ---------- KWITANSI ---------- */
+function renderKW(){
+  const c = ctx(), r = S.settings.rk;
+  const tpl = (s) => String(s || '').replace(/\{TAHUN\}/g, c.tahun);
+  $('#kwList').innerHTML = S.rk.berkas.length ? S.rk.berkas.map((b, bi) => { const tot = G.berkasTotal(b);
+    return `<div class="card bk kwc">
+      <div class="ch"><div class="no">${bi + 1}</div><div><h2>${esc(b.nama)}</h2><p>${esc(b.akun || '')}</p></div><div class="tot2"><b>${rpx(tot)}</b><small>dari Rincian SPPD</small></div></div>
+      <div class="cb">
+        <div class="meta"><div><span>Kepada</span><b>${esc(b.penerima || '-')}</b></div><div><span>Jumlah uang</span><b>${rpx(tot)},00</b></div><div><span>Tahun anggaran</span><b>${esc(c.tahun)}</b></div></div>
+        <div class="tb" style="margin:0 0 14px">Terbilang: <i>${esc(G.terbilang(tot))}</i></div>
+        <div class="grid">
+          <div class="f"><label>Nomor bukti <span class="opt">kosongkan untuk ditulis tangan</span></label>
+            <div class="nbk"><input data-kw="${bi}.noBukti" value="${esc(b.noBukti || '')}" placeholder="No."><span class="sf"><input data-kw="${bi}.suffix" value="${esc(b.suffix || '')}"></span></div>
+            <div class="hint">Tercetak: <b>${esc((b.noBukti || '……') + tpl(b.suffix))}</b></div></div>
+          <div class="f"><label>Kuitansi supplier <span class="opt">opsional</span></label><input data-kw="${bi}.supplier" value="${esc(b.supplier || '')}"></div>
+          <div class="f"><label>Awalan “Untuk Pembayaran”</label><input data-kw="${bi}.prefix" value="${esc(b.prefix || '')}" placeholder="mis. Uang Harian / BBM PP (Pulang Pergi) atas"></div>
+          <div class="f"><label>Penerima uang</label><select data-kw="${bi}.penerima">${pegOpts(b.penerima)}</select></div>
+          <div class="f full"><label>Untuk Pembayaran <span class="opt">otomatis = awalan + uraian perjadin; boleh diubah</span></label>
+            <textarea data-kw="${bi}.untuk" rows="4" placeholder="${esc(G.untukBayar(c, { ...b, untuk: '' }))}">${esc(b.untuk || '')}</textarea></div>
+        </div>
+      </div></div>`; }).join('')
+    : `<div class="card"><div class="empty-st"><svg class="i"><use href="#i-receipt"/></svg><b>Belum ada kwitansi</b>Kwitansi dibuat dari berkas di menu <b style="display:inline">Rincian SPPD</b>. Susun rinciannya terlebih dahulu.</div></div>`;
+  rkSummary();
+}
+$('#kwList').addEventListener('input', (e) => { const p = e.target.dataset.kw; if (!p) return; const [bi, k] = p.split('.'); S.rk.berkas[+bi][k] = e.target.value; save();
+  if (k === 'noBukti' || k === 'suffix') { const b = S.rk.berkas[+bi], c = ctx(); const h = e.target.closest('.f').querySelector('.hint b'); if (h) h.textContent = (b.noBukti || '……') + String(b.suffix || '').replace(/\{TAHUN\}/g, c.tahun); }
+  if (k === 'prefix') { const ta = $(`[data-kw="${bi}.untuk"]`); if (ta) ta.placeholder = G.untukBayar(ctx(), { ...S.rk.berkas[+bi], untuk: '' }); } });
+
+/* ---------- cetak rincian / kwitansi ---------- */
+async function genRK(kind, idx){
+  const c = ctx(); const list = idx == null ? S.rk.berkas : [S.rk.berkas[idx]];
+  if (!list.length) return toast('Belum ada berkas. Susun rincian terlebih dahulu.', 1);
+  if (!c.nomor && !(await ask('Nomor SPT di Form SPPD belum diisi. Tetap buat dokumen?'))) return;
+  const no = safe(String(S.form.nomor || 'tanpa-nomor')), suf = idx == null ? '' : '_' + safe(list[0].nama);
+  try {
+    let doc, name;
+    if (kind === 'rincian') { doc = G.rincian(c, LOGO, S.rk, list); name = `Rincian_SPPD_${no}${suf}.docx`; }
+    else if (kind === 'kwitansi') { doc = G.kwitansi(c, S.rk, list); name = `Kwitansi_${no}${suf}.docx`; }
+    else { doc = G.rincianKwitansi(c, LOGO, S.rk, list); name = `Rincian_Kwitansi_${no}${suf}.docx`; }
+    await deliver(await G.toBlob(doc), name);
+  } catch (e) { console.error(e); toast('Gagal membuat dokumen: ' + e.message, 1); }
+}
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-rk],[data-rk1]'); if (!b) return;
+  b.disabled = true; try { await genRK(b.dataset.rk || b.dataset.rk1, b.dataset.rk1 ? +b.dataset.i : null); } finally { b.disabled = false; }
+});
+
 /* ---------- PEGAWAI ---------- */
 const isMiss = (p) => p.kategori === 'S' && (!p.nip || p.nip === '-' || !p.pangkat || !p.jabatan);
 function renderPeg(){
@@ -31475,8 +31960,10 @@ $('#pegDef').onclick = async () => { if (await ask('Kembalikan data pegawai ke d
 /* ---------- PENGATURAN ---------- */
 const getS = (k) => k.split('.').reduce((o, x) => o[x], S.settings);
 const setS = (k, v) => { const ks = k.split('.'); const last = ks.pop(); ks.reduce((o, x) => o[x], S.settings)[last] = v; };
-function renderSet(){ $$('[data-s]').forEach((el) => { const v = getS(el.dataset.s);
+function renderSet(){ $$('[data-pegsel]').forEach((el) => { el.innerHTML = S.pegawai.filter((p) => p.nama).map((p) => `<option>${esc(p.nama)}</option>`).join(''); });
+  $$('[data-s]').forEach((el) => { const v = getS(el.dataset.s);
   if (el.type === 'checkbox') el.checked = !!v; else el.value = Array.isArray(v) ? v.join('\n') : (v ?? ''); }); }
+$('#v-set').addEventListener('change', (e) => { if (e.target.tagName === 'SELECT' && e.target.dataset.s) { setS(e.target.dataset.s, e.target.value); save(); } });
 $('#v-set').addEventListener('input', (e) => { const el = e.target; if (!el.dataset.s) return;
   const k = el.dataset.s; let v = el.type === 'checkbox' ? el.checked : el.value;
   if (k === 'dasar') v = el.value.split('\n'); if (el.type === 'number') v = Number(el.value) || ''; setS(k, v); save(); });
