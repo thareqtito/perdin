@@ -267,6 +267,11 @@ table.peg tr.miss td{background:#fffaf0}
 .nbk .sf{flex:1;min-width:0}
 .nbk .sf input{border-radius:0 var(--rf) var(--rf) 0;border-left:0;max-width:none}
 
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:8px;font-size:12.5px;font-weight:600;color:var(--ink2);cursor:pointer}
+.seg button.on{background:#fff;color:var(--brand);box-shadow:var(--sh)}
+.optrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}
+.optrow .lbl{margin:0}
 /* ---------- toast & modal ---------- */
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);background:#16181d;color:#fff;padding:11px 16px;border-radius:12px;font-size:13px;font-weight:500;opacity:0;transition:.25s;pointer-events:none;z-index:60;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 #toast.show{opacity:1;transform:translateX(-50%)}
@@ -439,11 +444,14 @@ table.peg tr.miss td{background:#fffaf0}
   <div class="card" style="margin-bottom:18px">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-calc"/></svg></div><div><h2>Rincian Pertanggungjawaban Perjalanan Dinas</h2><p id="rkSrc">Data surat tugas diambil dari Form SPPD</p></div>
       <div class="rt row"><button class="btn sm" id="rkAuto"><svg class="i" style="width:15px;height:15px"><use href="#i-wand"/></svg> Susun otomatis dari Form SPPD</button></div></div>
-    <div class="cb" style="padding-top:12px"><div class="hint" style="margin:0;display:block">Satu <b>berkas</b> = satu lembar rincian + satu kwitansi (mis. Uang Harian &amp; Penginapan, Transport BBM, Tol). Jumlah dihitung otomatis.</div></div>
+    <div class="cb" style="padding-top:12px"><div class="hint" style="margin:0;display:block">Satu <b>berkas</b> = satu lembar rincian + satu kwitansi (mis. Uang Harian &amp; Penginapan, Transport BBM, Tol). Jumlah dihitung otomatis.</div>
+      <div class="optrow"><span class="lbl">Transport BBM &amp; Tol PP</span>
+        <div class="seg" id="segTr"><button type="button" data-tr="pisah">Dipisah (2 berkas)</button><button type="button" data-tr="gabung">Digabung (1 berkas)</button></div>
+        <span class="hint" style="margin:0">Berlaku untuk berkas yang ada dan susun otomatis.</span></div></div>
   </div>
   <div id="bkList"></div>
   <div class="card"><div class="cb row" style="align-items:center">
-    <select id="bkPreset" style="max-width:300px"><option value="harian">Uang Harian &amp; Penginapan</option><option value="bbm">Transport PP (BBM)</option><option value="tol">Tol PP</option><option value="kosong">Berkas kosong</option></select>
+    <select id="bkPreset" style="max-width:300px"><option value="harian">Uang Harian &amp; Penginapan</option><option value="bbm">Transport PP (BBM)</option><option value="tol">Tol PP</option><option value="transport">Transport PP (BBM &amp; Tol digabung)</option><option value="kosong">Berkas kosong</option></select>
     <button class="btn pri" id="bkAdd">+ Tambah berkas</button>
   </div></div>
 </div>
@@ -31771,12 +31779,14 @@ function presetBerkas(kind){
     if (!groups[0].items.length) groups[0].items.push(newItem('harian'));
     if (driver) groups.push({ judul: 'Uang Harian Driver (Biasa)', items: [newItem('harian', { nama: driver.nama, tarif: tf.driver })] });
     if (lama > 1) groups.push({ judul: 'Penginapan', items: [newItem('inap', { kamar: Math.max(1, Math.ceil((orang.length + (driver ? 1 : 0)) / 2)), malam: lama - 1 })] });
-    return { id: uid(), nama: 'Uang Harian & Penginapan', akun: r.akunHarian, penerima: penerima1, prefix: 'Uang Harian', suffix: r.suffixBukti, noBukti: '', untuk: '', supplier: '', groups };
+    return { id: uid(), kind: 'harian', nama: 'Uang Harian & Penginapan', akun: r.akunHarian, penerima: penerima1, prefix: 'Uang Harian', suffix: r.suffixBukti, noBukti: '', untuk: '', supplier: '', groups };
   }
   const pen = (driver || c.sek[0] || c.kom[0] || {}).nama || '';
-  if (kind === 'bbm') return { id: uid(), nama: 'Transport PP (BBM)', akun: r.akunTransport, penerima: pen, prefix: 'BBM PP (Pulang Pergi) atas', suffix: r.suffixBuktiTransport, noBukti: '', untuk: '', supplier: '',
+  if (kind === 'bbm') return { id: uid(), kind, nama: 'Transport PP (BBM)', akun: r.akunTransport, penerima: pen, prefix: 'BBM PP (Pulang Pergi) atas', suffix: r.suffixBuktiTransport, noBukti: '', untuk: '', supplier: '',
     groups: [{ judul: 'Transport PP', items: [newItem('bbm', { label: 'BBM 1' }), newItem('bbm', { label: 'BBM 2' })] }] };
-  if (kind === 'tol') return { id: uid(), nama: 'Tol PP', akun: r.akunTransport, penerima: pen, prefix: 'Tol PP (Pulang Pergi) atas', suffix: r.suffixBuktiTransport, noBukti: '', untuk: '', supplier: '',
+  if (kind === 'transport') return { id: uid(), kind, nama: 'Transport PP (BBM & Tol)', akun: r.akunTransport, penerima: pen, prefix: 'BBM dan Tol PP (Pulang Pergi) atas', suffix: r.suffixBuktiTransport, noBukti: '', untuk: '', supplier: '',
+    groups: [{ judul: 'Transport PP (BBM)', items: [newItem('bbm', { label: 'BBM 1' }), newItem('bbm', { label: 'BBM 2' })] }, { judul: 'Tol PP', items: [newItem('nom', { label: 'Tol 1' }), newItem('nom', { label: 'Tol 2' })] }] };
+  if (kind === 'tol') return { id: uid(), kind, nama: 'Tol PP', akun: r.akunTransport, penerima: pen, prefix: 'Tol PP (Pulang Pergi) atas', suffix: r.suffixBuktiTransport, noBukti: '', untuk: '', supplier: '',
     groups: [{ judul: 'Tol PP', items: [newItem('nom', { label: 'Tol 1' }), newItem('nom', { label: 'Tol 2' })] }] };
   return { id: uid(), nama: 'Berkas baru', akun: r.akunHarian, penerima: penerima1, prefix: '', suffix: r.suffixBukti, noBukti: '', untuk: '', supplier: '', groups: [{ judul: 'Rincian biaya', items: [newItem('nom')] }] };
 }
@@ -31830,6 +31840,7 @@ function rkSummary(){
   $('#rkWarn').innerHTML = w.length ? `<div class="alert w"><ul>${w.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>` : '';
 }
 function renderRK(){
+  $$('#segTr button').forEach((x) => x.classList.toggle('on', (x.dataset.tr === 'gabung') === !!S.rk.gabungTransport));
   $('#rkTgl').value = S.rk.tglBayar || '';
   $('#bkList').innerHTML = S.rk.berkas.length ? S.rk.berkas.map(renderBerkas).join('')
     : `<div class="card" style="margin-bottom:18px"><div class="empty-st"><svg class="i"><use href="#i-calc"/></svg><b>Belum ada rincian</b>Klik <b style="display:inline">Susun otomatis dari Form SPPD</b> untuk membuat berkas dari pelaksana, lama perjalanan, dan tarif bawaan — lalu sesuaikan angkanya.</div></div>`;
@@ -31865,16 +31876,49 @@ $('#bkList').addEventListener('click', async (e) => {
   else if (d.gadd != null) S.rk.berkas[+d.gadd].groups.push({ judul: '', items: [newItem('nom')] });
   save(); renderRK();
 });
-$('#bkAdd').onclick = () => { S.rk.berkas.push(presetBerkas($('#bkPreset').value)); save(); renderRK(); setTimeout(() => { const l = $$('#bkList .bk'); l[l.length - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50); };
+$('#bkAdd').onclick = () => { const kv = $('#bkPreset').value; if (kv === 'transport') S.rk.gabungTransport = true; if (kv === 'bbm' || kv === 'tol') S.rk.gabungTransport = false; S.rk.berkas.push(presetBerkas(kv)); save(); renderRK(); setTimeout(() => { const l = $$('#bkList .bk'); l[l.length - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50); };
 $('#rkAuto').onclick = async () => {
   const c = ctx();
   if (!c.kom.length && !c.sek.length) return toast('Pilih pelaksana di Form SPPD terlebih dahulu', 1);
   if (S.rk.berkas.length && !(await ask('Ganti semua berkas rincian dengan susunan otomatis dari Form SPPD?'))) return;
   const B = [presetBerkas('harian')];
-  if (/dinas/i.test(S.form.kendaraan || '')) B.push(presetBerkas('bbm'), presetBerkas('tol'));
+  if (/dinas/i.test(S.form.kendaraan || '')) { if (S.rk.gabungTransport) B.push(presetBerkas('transport')); else B.push(presetBerkas('bbm'), presetBerkas('tol')); }
   S.rk.berkas = B; save(); renderRK(); toast(B.length + ' berkas disusun — periksa tarif, liter BBM, dan biaya tol');
 };
 $('#rkTgl').addEventListener('input', (e) => { S.rk.tglBayar = e.target.value; save(); });
+
+
+/* ---------- gabung / pisah transport (BBM & Tol) ---------- */
+function kindOf(b){
+  if (b.kind) return b.kind;
+  const its = (b.groups || []).flatMap((g) => g.items || []);
+  const hasBbm = its.some((i) => i.t === 'bbm'), isTol = /tol/i.test(b.nama || '') || (b.groups || []).some((g) => /tol/i.test(g.judul || ''));
+  if (hasBbm && isTol) return 'transport'; if (hasBbm) return 'bbm'; if (isTol && its.every((i) => i.t === 'nom')) return 'tol';
+  if (its.some((i) => i.t === 'harian')) return 'harian'; return 'lain';
+}
+function gabungTransport(){
+  const B = S.rk.berkas, ib = B.findIndex((b) => kindOf(b) === 'bbm'), it = B.findIndex((b) => kindOf(b) === 'tol');
+  if (ib < 0 || it < 0) return false;
+  const bb = B[ib], tb = B[it];
+  const g = { ...bb, id: uid(), kind: 'transport', nama: 'Transport PP (BBM & Tol)', prefix: 'BBM dan Tol PP (Pulang Pergi) atas', untuk: '',
+    groups: bb.groups.map((x) => ({ ...x, judul: /^transport pp$/i.test(x.judul || '') ? 'Transport PP (BBM)' : x.judul })).concat(tb.groups) };
+  B.splice(ib, 1, g); B.splice(B.indexOf(tb), 1); return true;
+}
+function pisahTransport(){
+  const B = S.rk.berkas, i = B.findIndex((b) => kindOf(b) === 'transport'); if (i < 0) return false;
+  const b = B[i], isTolG = (g) => /tol/i.test(g.judul || '') || ((g.items || []).length && g.items.every((x) => x.t === 'nom') && !(g.items || []).some((x) => x.t === 'bbm'));
+  const gB = b.groups.filter((g) => !isTolG(g)), gT = b.groups.filter(isTolG);
+  const bbm = { ...b, id: uid(), kind: 'bbm', nama: 'Transport PP (BBM)', prefix: 'BBM PP (Pulang Pergi) atas', untuk: '', groups: gB.length ? gB.map((x) => ({ ...x, judul: x.judul === 'Transport PP (BBM)' ? 'Transport PP' : x.judul })) : [{ judul: 'Transport PP', items: [newItem('bbm', { label: 'BBM 1' })] }] };
+  const tol = { ...b, id: uid(), kind: 'tol', nama: 'Tol PP', prefix: 'Tol PP (Pulang Pergi) atas', untuk: '', noBukti: '', supplier: '', groups: gT.length ? gT : [{ judul: 'Tol PP', items: [newItem('nom', { label: 'Tol 1' })] }] };
+  B.splice(i, 1, bbm, tol); return true;
+}
+$('#segTr').addEventListener('click', async (e) => { const btn = e.target.closest('[data-tr]'); if (!btn) return;
+  const mau = btn.dataset.tr === 'gabung'; if (mau === !!S.rk.gabungTransport) return;
+  S.rk.gabungTransport = mau;
+  const ok = mau ? gabungTransport() : pisahTransport();
+  save(); renderRK();
+  toast(ok ? (mau ? 'BBM & Tol digabung menjadi 1 berkas (1 rincian + 1 kwitansi)' : 'BBM & Tol dipisah menjadi 2 berkas') : (mau ? 'Mode digabung aktif untuk susun otomatis' : 'Mode dipisah aktif untuk susun otomatis'));
+});
 
 /* ---------- KWITANSI ---------- */
 function renderKW(){
