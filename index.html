@@ -31447,15 +31447,18 @@ MAX: 9026 };
     const nipL = (p) => P(emptyish(p.nip) ? '' : 'NIP. ' + p.nip, { size: SZ, al: 'C' });
     const terima = T([R([C('', { w: half }), C([P('Pacitan, ' + tglBayar(ctx, rk), { size: SZ, al: 'C' }), P('PENERIMA UANG', { size: SZ, al: 'C' }), ...blank(3, SZ), P(String(pen.nama || '').toUpperCase(), { size: 22, bold: true, al: 'C' })], { w: W - half })])], [half, W - half]);
     const garis = (after = 120) => P('', { size: 6, after, border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: '000000', space: 2 } } });
+    // garis atas & bawah blok tanda tangan dibuat sebagai border tabel (tidak hilang di pergantian section/halaman)
+    const gb = { top: SB(8), bottom: SB(8), left: NB, right: NB };
+    const gm = { top: 160, bottom: 400, left: 60, right: 60 };
     const ttd = T([R([
-      C([P('an. Kuasa Pengguna Anggaran', { size: SZ, al: 'C' }), P('Pejabat Pembuat Komitmen', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(ppk.nama || '').toUpperCase(), { size: 22 }), nipL(ppk)], { w: half }),
-      C([P('Lunas Dibayar,  ' + bulanBayar(ctx, rk), { size: SZ, al: 'C' }), P('Bendahara Pengeluaran', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(ben.nama || '').toUpperCase(), { size: 22 }), nipL(ben)], { w: W - half }),
+      C([P('an. Kuasa Pengguna Anggaran', { size: SZ, al: 'C' }), P('Pejabat Pembuat Komitmen', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(ppk.nama || '').toUpperCase(), { size: 22 }), nipL(ppk)], { w: half, borders: gb, m: gm }),
+      C([P('Lunas Dibayar,  ' + bulanBayar(ctx, rk), { size: SZ, al: 'C' }), P('Bendahara Pengeluaran', { size: SZ, al: 'C' }), ...blank(3, SZ), UL(String(ben.nama || '').toUpperCase(), { size: 22 }), nipL(ben)], { w: W - half, borders: gb, m: gm }),
     ])], [half, W - half]);
     return {
       properties: { page: PAGE },
       children: [infoT, P('', { size: SZ, after: 200 }),
         P('Kuitansi/Bukti Pembayaran', { size: 28, bold: true, al: 'C', after: 240 }),
-        isi, P('', { size: SZ, after: 160 }), terima, P('', { size: SZ }), garis(160), ttd, P('', { size: SZ }), garis(0)],
+        isi, P('', { size: SZ, after: 160 }), terima, P('', { size: SZ, after: 120 }), ttd],
     };
   }
 
