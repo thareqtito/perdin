@@ -28,13 +28,8 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdro
 .brand h1{margin:0;font-size:16.5px;font-weight:800;letter-spacing:-.2px;line-height:1.2}
 .brand small{display:block;font-size:12px;color:var(--mut);font-weight:500}
 .brand .acc{width:4px;height:34px;border-radius:4px;background:linear-gradient(var(--brand),#e14a52)}
-nav.tabs{margin-left:auto;display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:12px;border:1px solid var(--line)}
-nav.tabs button{display:flex;align-items:center;gap:7px;background:none;border:0;color:var(--ink2);padding:8px 14px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600}
-nav.tabs button:hover{color:var(--ink)}
-nav.tabs button.on{background:#fff;color:var(--brand);box-shadow:var(--sh)}
-@media (max-width:1180px){nav.tabs button span{display:none}}
 @media (max-width:720px){.brand small{display:none}}
-@media (max-width:560px){.brand>div,.brand .acc{display:none}.bar{padding:8px 12px}nav.tabs button{padding:8px 11px}}
+
 
 main{padding:18px 22px 40px;max-width:2200px;margin:0 auto}
 .view{display:none}.view.on{display:block;animation:fade .25s ease}
@@ -208,7 +203,7 @@ select option{color:var(--ink)}
 .foto .ac .btn{flex:1;padding:3px 0}
 
 /* ---------- pegawai & pengaturan ---------- */
-table.peg{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+table.peg{width:100%;min-width:960px;border-collapse:separate;border-spacing:0;font-size:13px}
 table.peg th{text-align:left;font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;padding:10px 6px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:1}
 table.peg td{padding:5px 6px;border-bottom:1px solid var(--line)}
 table.peg input,table.peg select{padding:7px 9px;font-size:13px;border-radius:9px}
@@ -272,6 +267,95 @@ table.peg tr.miss td{background:#fffaf0}
 .seg button.on{background:#fff;color:var(--brand);box-shadow:var(--sh)}
 .optrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}
 .optrow .lbl{margin:0}
+/* ---------- langkah pengisian ---------- */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.steps a{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px;text-decoration:none;color:var(--ink);box-shadow:var(--sh);transition:.15s;min-width:0}
+.steps a:hover{border-color:var(--brand);transform:translateY(-1px)}
+.steps .sn{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--bg);color:var(--mut);flex:none;transition:.2s}
+.steps .sn svg{width:16px;height:16px}
+.steps .tx{min-width:0}
+.steps .tx b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps .tx small{display:block;font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps a.ok .sn{background:#e7f6ee;color:var(--ok)}
+.steps a.ok .sn::before{content:"✓";font-size:14px}
+.steps a.ok .sn{font-size:0}
+.steps a.go{background:linear-gradient(135deg,var(--brand),#d23a43);color:#fff;border-color:transparent}
+.steps a.go .sn{background:rgba(255,255,255,.2);color:#fff}
+.steps a.go small{color:rgba(255,255,255,.85)}
+.st{margin-left:auto;font-size:11.5px;font-weight:700;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.st.ok{background:#e7f6ee;color:var(--ok)}
+.st.no{background:#fff4e5;color:#9a5b00}
+.fab{display:none}
+@media (max-width:1040px){
+  .steps{grid-template-columns:repeat(5,auto);overflow-x:auto;scrollbar-width:none;margin:0 -22px 16px;padding:2px 22px 6px;scroll-snap-type:x mandatory}
+  .steps::-webkit-scrollbar{display:none}
+  .steps a{scroll-snap-align:start;min-width:150px}
+  .fab{position:fixed;right:16px;bottom:84px;z-index:35;display:flex;align-items:center;gap:8px;border:0;background:var(--brand);color:#fff;font-weight:700;font-size:14px;padding:12px 16px;border-radius:999px;box-shadow:0 10px 24px rgba(179,18,27,.35);cursor:pointer}
+  .fab.hide{opacity:0;pointer-events:none;transform:translateY(10px)}
+  .fab{transition:.2s}
+}
+/* ---------- mobile: navigasi bawah, sentuhan lebih besar ---------- */
+@media (max-width:760px){
+  body{padding-bottom:76px}
+  header{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff}
+  main{padding:14px 12px 30px}
+  .steps{margin:0 -12px 14px;padding:2px 12px 6px}
+  .bar{padding:8px 14px}
+  .brand>div,.brand .acc{display:flex!important}
+  .brand>div{display:block!important}
+  .brand h1{font-size:15px}
+  .brand h1 .badge{display:none}
+  .fab{bottom:calc(84px + env(safe-area-inset-bottom))}
+  #toast{bottom:calc(140px + env(safe-area-inset-bottom))}
+  .card{border-radius:14px}
+  .ch{padding:14px 14px 0}
+  .cb{padding:14px 14px 16px}
+  input,select,textarea{font-size:16px}  /* cegah zoom otomatis di iPhone */
+  .grid.dates{grid-template-columns:1fr 1fr}
+  .grid.dates>.f:last-child{grid-column:1/-1}
+  .st{display:none}
+}
+@media (max-width:380px){.sidenav .sn{font-size:9.5px}}
+/* ---------- sidebar ---------- */
+:root{--sw:112px;--hh:62px}
+body.mini{--sw:76px}
+header{border-bottom:3px solid var(--brand)}
+.sidenav{position:fixed;left:0;top:var(--hh);bottom:0;width:var(--sw);background:#fff;border-right:1px solid var(--line);box-shadow:2px 0 12px rgba(16,24,40,.04);overflow-y:auto;z-index:25;display:flex;flex-direction:column;transition:width .2s;scrollbar-width:thin}
+.sn-toggle{border:0;background:none;color:var(--mut);height:56px;flex:none;cursor:pointer;display:grid;place-items:center;border-bottom:1px solid var(--line)}
+.sn-toggle:hover{color:var(--brand)}
+.sn-toggle svg{width:22px;height:22px}
+.sidenav .sn{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:none;padding:16px 6px 14px;cursor:pointer;color:var(--ink2);font-size:12.5px;font-weight:600;line-height:1.25;text-align:center;border-bottom:1px solid var(--line);transition:background .15s,color .15s}
+.sidenav .sn svg{width:30px;height:30px;stroke-width:1.5}
+.sidenav .sn:hover{background:#fafbfc;color:var(--ink)}
+.sidenav .sn.on{color:var(--brand-d);background:linear-gradient(90deg,var(--brand-50),#fff)}
+.sidenav .sn.on::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:5px;border-radius:0 6px 6px 0;background:var(--brand)}
+.sidenav .sn.on svg{color:var(--brand)}
+.sn-sub{display:none;background:#fafbfc;border-bottom:1px solid var(--line)}
+.sn-sub.open{display:block}
+.sidenav .sn.s2{padding:10px 6px;font-size:11.5px;gap:5px;border-bottom:1px dashed var(--line)}
+.sidenav .sn.s2:last-child{border-bottom:0}
+.sidenav .sn.s2 svg{width:20px;height:20px}
+.sidenav .sn.s2.on{background:#fff}
+.sidenav .sn.s2.on::before{width:3px}
+body.mini .sidenav .sn span{display:none}
+body.mini .sidenav .sn{padding:14px 6px}
+main{margin-left:var(--sw);transition:margin .2s}
+.side{top:calc(var(--hh) + 16px)}
+.subtabs{display:flex;gap:6px;margin-bottom:16px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:5px;width:max-content;max-width:100%;box-shadow:var(--sh)}
+.subtabs button{display:flex;align-items:center;gap:7px;border:0;background:none;padding:8px 14px;border-radius:9px;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer}
+.subtabs button svg{width:16px;height:16px}
+.subtabs button.on{background:var(--brand-50);color:var(--brand-d)}
+@media (max-width:760px){
+  .sidenav{top:auto;bottom:0;left:0;right:0;width:auto;height:auto;flex-direction:row;overflow:visible;border-right:0;border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(16,24,40,.06);padding-bottom:env(safe-area-inset-bottom);z-index:40}
+  .sn-toggle,.sn-sub,.sn-sub.open{display:none!important}
+  .sidenav .sn{flex:1;padding:8px 2px 7px;gap:3px;font-size:10.5px;border-bottom:0}
+  .sidenav .sn svg{width:22px;height:22px;stroke-width:1.8}
+  .sidenav .sn.on::before{left:22%;right:22%;top:0;bottom:auto;width:auto;height:3px;border-radius:0 0 4px 4px}
+  .sidenav .sn.on{background:var(--brand-50)}
+  body.mini .sidenav .sn span{display:block}
+  main{margin-left:0}
+  .subtabs{width:100%}.subtabs button{flex:1;justify-content:center}
+}
 /* ---------- toast & modal ---------- */
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);background:#16181d;color:#fff;padding:11px 16px;border-radius:12px;font-size:13px;font-weight:500;opacity:0;transition:.25s;pointer-events:none;z-index:60;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 #toast.show{opacity:1;transform:translateX(-50%)}
@@ -299,29 +383,43 @@ table.peg tr.miss td{background:#fffaf0}
   <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></symbol>
   <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l3-2 3 2 3-2 3 2 3-2 3 2V2l-3 2-3-2-3 2-3-2-3 2z"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
   <symbol id="i-wand" viewBox="0 0 24 24"><path d="m15 4 5 5M3 21l12-12M14 2v2M20 8h2M18 3l1-1M11 6h-1M17 12v1"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h3M10 6h10M4 12h3M10 12h10M4 18h3M10 18h10"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
   <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
 </svg>
 
 <header><div class="bar">
   <div class="brand"><img id="hdrLogo" alt="Logo KPU"><span class="acc"></span>
-    <div><h1>Generator SPPD <span class="badge" id="appVer" style="vertical-align:middle;font-size:10.5px">versi 27-11-2026b</span></h1><small>KPU Kabupaten Pacitan · SPT · SPD · LPD · Rincian · Kwitansi (Word A4)</small></div></div>
-  <nav class="tabs">
-    <button data-v="form" class="on"><svg class="i"><use href="#i-file"/></svg><span>Form SPPD</span></button>
-    <button data-v="rk"><svg class="i"><use href="#i-calc"/></svg><span>Rincian SPPD</span></button>
-    <button data-v="kw"><svg class="i"><use href="#i-receipt"/></svg><span>Kwitansi</span></button>
-    <button data-v="peg"><svg class="i"><use href="#i-users"/></svg><span>Data Pegawai</span></button>
-    <button data-v="set"><svg class="i"><use href="#i-gear"/></svg><span>Pengaturan</span></button>
-  </nav>
+    <div><h1>Generator SPPD <span class="badge" id="appVer" style="vertical-align:middle;font-size:10.5px">versi 27-11-2026d</span></h1><small>KPU Kabupaten Pacitan · SPT · SPD · LPD · Rincian · Kwitansi (Word A4)</small></div></div>
 </div></header>
+
+<nav class="sidenav" id="sidenav" aria-label="Menu utama">
+  <button type="button" class="sn-toggle" id="snToggle" title="Ciutkan / lebarkan menu" aria-label="Ciutkan menu"><svg class="i"><use href="#i-menu"/></svg></button>
+  <button type="button" class="sn on" data-v="form"><svg class="i"><use href="#i-file"/></svg><span>Form SPPD</span></button>
+  <button type="button" class="sn" data-v="rk"><svg class="i"><use href="#i-calc"/></svg><span>Rincian SPPD</span></button>
+  <button type="button" class="sn" data-v="kw"><svg class="i"><use href="#i-receipt"/></svg><span>Kwitansi</span></button>
+  <button type="button" class="sn" data-v="set" data-grp="set"><svg class="i"><use href="#i-gear"/></svg><span>Pengaturan</span></button>
+  <div class="sn-sub" id="snSub">
+    <button type="button" class="sn s2" data-v="set"><svg class="i"><use href="#i-sliders"/></svg><span>Umum</span></button>
+    <button type="button" class="sn s2" data-v="peg"><svg class="i"><use href="#i-users"/></svg><span>Data Pegawai</span></button>
+  </div>
+</nav>
 
 <main>
 <!-- ================= FORM ================= -->
 <section class="view on" id="v-form">
+<div class="steps" id="steps">
+  <a href="#c-nomor" data-step="nomor"><span class="sn">1</span><span class="tx"><b>Nomor &amp; Dasar</b><small></small></span></a>
+  <a href="#c-pel" data-step="pel"><span class="sn">2</span><span class="tx"><b>Pelaksana</b><small></small></span></a>
+  <a href="#c-perj" data-step="perj"><span class="sn">3</span><span class="tx"><b>Perjalanan</b><small></small></span></a>
+  <a href="#c-ttd" data-step="ttd"><span class="sn">4</span><span class="tx"><b>Penandatangan</b><small></small></span></a>
+  <a href="#c-cetak" data-step="cetak" class="go"><span class="sn"><svg class="i"><use href="#i-print"/></svg></span><span class="tx"><b>Cetak</b><small>SPT · SPD · LPD</small></span></a>
+</div>
 <div class="layout">
 <div class="fcols">
 <div class="fcol">
-  <div class="card">
-    <div class="ch"><div class="ic"><svg class="i"><use href="#i-hash"/></svg></div><div><h2>Nomor &amp; Dasar</h2><p>Nomor surat tugas dan dasar penugasan</p></div></div>
+  <div class="card" id="c-nomor">
+    <div class="ch"><div class="ic"><svg class="i"><use href="#i-hash"/></svg></div><div><h2>Nomor &amp; Dasar</h2><p>Nomor surat tugas dan dasar penugasan</p></div><span class="st" data-st="nomor"></span></div>
     <div class="cb"><div class="grid">
       <div class="f"><label for="nomor">Nomor SPT</label><input id="nomor" data-f="nomor" placeholder="mis. 16">
         <div class="hint">Menjadi <b id="nomorFull">-</b></div></div>
@@ -331,8 +429,8 @@ table.peg tr.miss td{background:#fffaf0}
     </div></div>
   </div>
 
-  <div class="card">
-    <div class="ch"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><div><h2>Pelaksana</h2><p>Pilih nama dari daftar; urutan baris = urutan di dokumen</p></div></div>
+  <div class="card" id="c-pel">
+    <div class="ch"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><div><h2>Pelaksana</h2><p>Pilih nama dari daftar; urutan baris = urutan di dokumen</p></div><span class="st" data-st="pel"></span></div>
     <div class="cb pc">
       <div class="pgrid">
         <div class="pcol">
@@ -359,8 +457,8 @@ table.peg tr.miss td{background:#fffaf0}
     </div>
   </div>
 
-  <div class="card">
-    <div class="ch"><div class="ic"><svg class="i"><use href="#i-pen"/></svg></div><div><h2>Penandatangan</h2><p>Pejabat yang menandatangani SPT dan SPD</p></div></div>
+  <div class="card" id="c-ttd">
+    <div class="ch"><div class="ic"><svg class="i"><use href="#i-pen"/></svg></div><div><h2>Penandatangan</h2><p>Pejabat yang menandatangani SPT dan SPD</p></div><span class="st" data-st="ttd"></span></div>
     <div class="cb"><div class="grid">
       <div class="f"><label for="selTtd1">TTD Pejabat SPT-1 <span class="opt">Komisioner</span></label><select id="selTtd1" data-one="ttdSPT1"></select></div>
       <div class="f"><label for="selTtd2">TTD Pejabat SPT-2 <span class="opt">Sekretariat</span></label><select id="selTtd2" data-one="ttdSPT2"></select></div>
@@ -374,8 +472,8 @@ table.peg tr.miss td{background:#fffaf0}
 </div>
 
 <div class="fcol">
-  <div class="card">
-    <div class="ch"><div class="ic"><svg class="i"><use href="#i-map"/></svg></div><div><h2>Perjalanan Dinas</h2><p>Maksud, tujuan, waktu, dan hasil</p></div></div>
+  <div class="card" id="c-perj">
+    <div class="ch"><div class="ic"><svg class="i"><use href="#i-map"/></svg></div><div><h2>Perjalanan Dinas</h2><p>Maksud, tujuan, waktu, dan hasil</p></div><span class="st" data-st="perj"></span></div>
     <div class="cb"><div class="grid">
       <div class="f full"><label for="uraian">Uraian Perjadin <span class="opt">Untuk Melaksanakan Tugas / Maksud Perjalanan</span></label><textarea id="uraian" data-f="uraian" rows="4"></textarea></div>
       <div class="f full"><label for="materi">Materi Laporan Perjadin <span class="opt">judul &amp; bagian C LPD</span></label><textarea id="materi" data-f="materi" rows="4"></textarea></div>
@@ -392,7 +490,7 @@ table.peg tr.miss td{background:#fffaf0}
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" id="c-foto">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-cam"/></svg></div><div><h2>Dokumentasi Kegiatan</h2><p>Tampil 2 per baris di bagian F LPD</p></div><span class="rt badge" id="fotoCount">0 foto</span></div>
     <div class="cb">
       <label class="drop" id="drop"><svg class="i"><use href="#i-cam"/></svg><span><b>Klik untuk memilih</b> atau seret foto ke sini</span><small>JPG / PNG · bisa banyak sekaligus</small>
@@ -405,7 +503,7 @@ table.peg tr.miss td{background:#fffaf0}
 </div>
 
 <aside class="side">
-  <div class="card">
+  <div class="card" id="c-cetak">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-print"/></svg></div><div><h2>Cetak Dokumen</h2><p>Unduh sebagai Word (.docx) A4</p></div></div>
     <div class="cb">
       <div id="valWarn"></div>
@@ -456,7 +554,7 @@ table.peg tr.miss td{background:#fffaf0}
   </div></div>
 </div>
 <aside class="side">
-  <div class="card">
+  <div class="card" id="c-cetak-rk">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-print"/></svg></div><div><h2>Cetak</h2><p>Word (.docx) A4, satu halaman per berkas</p></div></div>
     <div class="cb">
       <div id="rkWarn"></div>
@@ -482,7 +580,7 @@ table.peg tr.miss td{background:#fffaf0}
 <div class="layout">
 <div id="kwList"></div>
 <aside class="side">
-  <div class="card">
+  <div class="card" id="c-cetak-kw">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-print"/></svg></div><div><h2>Cetak Kwitansi</h2><p>Jumlah &amp; terbilang mengikuti Rincian SPPD</p></div></div>
     <div class="cb">
       <div class="acts">
@@ -498,6 +596,7 @@ table.peg tr.miss td{background:#fffaf0}
 </section>
 
 <section class="view" id="v-peg">
+<div class="subtabs"><button type="button" data-v="set"><svg class="i"><use href="#i-sliders"/></svg>Pengaturan Umum</button><button type="button" data-v="peg"><svg class="i"><use href="#i-users"/></svg>Data Pegawai</button></div>
   <div class="card">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><div><h2>Data Pegawai</h2><p>NIP, pangkat, dan jabatan dipakai otomatis di SPT, SPD, dan LPD. Baris kuning = data belum lengkap.</p></div><span class="rt badge" id="pegCount"></span></div>
     <div class="cb">
@@ -519,6 +618,7 @@ table.peg tr.miss td{background:#fffaf0}
 
 <!-- ================= PENGATURAN ================= -->
 <section class="view" id="v-set">
+<div class="subtabs"><button type="button" data-v="set"><svg class="i"><use href="#i-sliders"/></svg>Pengaturan Umum</button><button type="button" data-v="peg"><svg class="i"><use href="#i-users"/></svg>Data Pegawai</button></div>
 <div class="setgrid">
   <div class="card">
     <div class="ch"><div class="ic"><svg class="i"><use href="#i-hash"/></svg></div><div><h2>Penomoran &amp; SPT</h2></div></div>
@@ -590,6 +690,7 @@ table.peg tr.miss td{background:#fffaf0}
 </section>
 </main>
 
+<button class="fab" id="fab" type="button" aria-label="Ke tombol cetak"><svg class="i"><use href="#i-print"/></svg><span>Cetak</span></button>
 <div id="modal"><div class="box"><p id="mText"></p><div class="act2"><button class="btn" id="mNo">Batal</button><button class="btn pri" id="mYes">Ya, lanjutkan</button></div></div></div>
 <div id="toast"></div>
 
@@ -31550,12 +31651,18 @@ function hl(t, q){ if (!q) return esc(t); const i = t.toLowerCase().indexOf(q); 
   return esc(t.slice(0, i)) + '<mark>' + esc(t.slice(i, i + q.length)) + '</mark>' + esc(t.slice(i + q.length)); }
 
 /* ---------- tabs ---------- */
-$$('nav.tabs button').forEach((b) => b.onclick = () => {
-  $$('nav.tabs button').forEach((x) => x.classList.toggle('on', x === b));
-  $$('.view').forEach((v) => v.classList.toggle('on', v.id === 'v-' + b.dataset.v));
-  if (b.dataset.v === 'form') renderForm(); if (b.dataset.v === 'peg') renderPeg(); if (b.dataset.v === 'set') renderSet(); if (b.dataset.v === 'rk') renderRK(); if (b.dataset.v === 'kw') renderKW();
-  window.scrollTo(0, 0);
-});
+function go(v){
+  $$('.sidenav .sn[data-v], .subtabs [data-v]').forEach((x) => x.classList.toggle('on', x.dataset.grp ? (v === 'set' || v === 'peg') : x.dataset.v === v));
+  $('#snSub').classList.toggle('open', v === 'set' || v === 'peg');
+  $$('.view').forEach((x) => x.classList.toggle('on', x.id === 'v-' + v));
+  if (v === 'form') renderForm(); if (v === 'peg') renderPeg(); if (v === 'set') renderSet(); if (v === 'rk') renderRK(); if (v === 'kw') renderKW();
+  window.scrollTo(0, 0); setTimeout(updFab, 50);
+}
+document.addEventListener('click', (e) => { const b = e.target.closest('.sidenav [data-v], .subtabs [data-v]'); if (b) go(b.dataset.v); });
+function setHH(){ document.documentElement.style.setProperty('--hh', $('header').offsetHeight + 'px'); }
+setHH(); window.addEventListener('resize', setHH);
+try { if (localStorage.getItem('sppd-mini') === '1') document.body.classList.add('mini'); } catch (e) {}
+$('#snToggle').onclick = () => { document.body.classList.toggle('mini'); try { localStorage.setItem('sppd-mini', document.body.classList.contains('mini') ? '1' : '0'); } catch (e) {} };
 
 const ROLE = { komisioner: 'Komisioner', sekretariat: 'Sekretariat', driver: 'Driver', pengikut: 'Pengikut' };
 function usedElsewhere(self){ const m = {};
@@ -31648,6 +31755,7 @@ function refresh(){
       <button class="btn sm" data-one="${i}" title="Cetak SPD ${esc(p.nama)}"><svg class="i" style="width:15px;height:15px"><use href="#i-dl"/></svg></button></div>`; }).join('')
     : '<div class="empty">Pilih pelaksana terlebih dahulu.</div>';
   $('#tot').innerHTML = `<span>Komisioner <b>${c.kom.length}</b></span><span>Sekretariat <b>${c.sek.length}</b></span><span>Driver/Pengikut <b>${c.pengikut.length}</b></span><span>Total <b>${c.kom.length + c.sek.length + c.pengikut.length}</b> orang</span>`;
+  stepStatus(); setTimeout(updFab, 0);
   $('#sum').innerHTML = [
     ['Nomor', c.nomor || '-', 'w2'], ['Tujuan', c.tujuan || '-'], ['Lama', c.lama ? c.lamaTeks : '-'],
     ['Berangkat', c.tglBerangkat || '-'], ['Pulang', c.tglPulang || '-'],
@@ -31655,6 +31763,30 @@ function refresh(){
 }
 $('#spdList').addEventListener('change', (e) => { if (e.target.dataset.spd) spdSel[e.target.dataset.spd] = e.target.checked; });
 $('#spdList').addEventListener('click', (e) => { const b = e.target.closest('[data-one]'); if (b) gen('spd', [personsForSPD()[+b.dataset.one]]); });
+
+
+/* ---------- status langkah & tombol cetak melayang ---------- */
+function stepStatus(){
+  const f = S.form, c = ctx();
+  const st = {
+    nomor: [!!f.nomor && !!f.tglDisahkan, f.nomor ? (c.nomor || '') : 'Nomor belum diisi'],
+    pel: [c.kom.length + c.sek.length > 0, (c.kom.length + c.sek.length + c.pengikut.length) ? `${c.kom.length + c.sek.length + c.pengikut.length} orang` : 'Belum dipilih'],
+    perj: [!!(f.uraian && f.tujuan && f.tglBerangkat && f.tglPulang), f.tujuan ? `${f.tujuan}${c.lama ? ' · ' + c.lamaTeks : ''}` : 'Tujuan & tanggal'],
+    ttd: [!!(f.ttdSPT1 && f.ttdSPT2 && f.ttdSPD), 'SPT-1, SPT-2, SPD'],
+  };
+  Object.entries(st).forEach(([k, [ok, txt]]) => {
+    const a = $(`[data-step="${k}"]`); if (a) { a.classList.toggle('ok', ok); a.querySelector('small').textContent = txt; }
+    const p = $(`[data-st="${k}"]`); if (p) { p.className = 'st ' + (ok ? 'ok' : 'no'); p.textContent = ok ? 'Lengkap' : 'Belum lengkap'; }
+  });
+}
+$('#steps').addEventListener('click', (e) => { const a = e.target.closest('a[href^="#c-"]'); if (!a) return; e.preventDefault();
+  const el = $(a.getAttribute('href')); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); });
+function curView(){ const v = $('.view.on'); return v ? v.id.slice(2) : 'form'; }
+const FAB_TARGET = { form: '#c-cetak', rk: '#c-cetak-rk', kw: '#c-cetak-kw' };
+function updFab(){ const t = FAB_TARGET[curView()], fab = $('#fab'); if (!t) { fab.classList.add('hide'); return; }
+  const r = $(t).getBoundingClientRect(); fab.classList.toggle('hide', r.top < window.innerHeight * 0.85 && r.bottom > 0); }
+$('#fab').onclick = () => { const t = FAB_TARGET[curView()]; if (t) window.scrollTo({ top: $(t).getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' }); };
+window.addEventListener('scroll', updFab, { passive: true }); window.addEventListener('resize', updFab);
 
 /* ---------- unduh ---------- */
 const dlP = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
