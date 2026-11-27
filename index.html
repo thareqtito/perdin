@@ -571,7 +571,7 @@ table.peg tr.miss td{background:#fffaf0}
       </div></div>
     </div>
     <div class="card">
-      <div class="ch"><div class="ic"><svg class="i"><use href="#i-map"/></svg></div><div><h2>Kop Surat (SPD, LPD &amp; Rincian)</h2><p>Seperti kop surat dinas: logo kiri, teks rata tengah, garis tebal di bawah. Baris kosong tidak dicetak.</p></div></div>
+      <div class="ch"><div class="ic"><svg class="i"><use href="#i-map"/></svg></div><div><h2>Kop Surat (SPD, LPD &amp; Rincian)</h2><p>Mengikuti Template Surat Dinas Sekretaris: logo kiri, nama &amp; alamat rata tengah, Telp kiri – Email kanan, garis tebal di bawah.</p></div></div>
       <div class="cb"><div class="grid">
         <div class="f"><label>Baris 1</label><input data-s="kop.baris1"></div>
         <div class="f"><label>Baris 2</label><input data-s="kop.baris2"></div>
@@ -30946,23 +30946,28 @@ MAX: 9026 };
 
   function logoRun(logo, w) { return new ImageRun({ type: 'png', data: logo, transformation: { width: w, height: Math.round(w * 300 / 271) } }); }
 
-  /* Kop surat — mengikuti kop surat dinas (Surat Konsultasi PMK):
-     tabel [logo 1500 | teks], semua Tahoma 12 rata tengah, garis bawah tebal 3 pt */
+  /* Kop surat — mengikuti Template Surat Dinas Sekretaris:
+     tabel 3 kolom [logo | telp | email], logo menempati semua baris,
+     nama instansi & alamat rata tengah, telp kiri & email kanan, garis tebal 3 pt di bawah tabel */
   function kop(ctx, logo) {
     const k = ctx.set.kop;
-    const lw = 1500, tw = W - lw;
-    const o = { size: (Number(k.ukuran) || 12) * 2, font: k.font || 'Tahoma', al: 'C', line: 276 };
-    const bawah = { top: NB, left: NB, right: NB, bottom: { style: BorderStyle.SINGLE, size: 24, color: '000000' } };
+    const lw = 1560, rest = W - lw, c2 = Math.round(rest * 3260 / 7506), c3 = rest - c2;
+    const font = k.font || 'Tahoma', sz = (Number(k.ukuran) || 12) * 2, szK = (Number(k.ukuranKontak) || 11) * 2;
     const z = { top: 0, bottom: 0, left: 0, right: 0 };
-    const kontak = [k.telp, k.email, k.laman].filter((x) => x && String(x).trim()).join('\u00A0'.repeat(14));
-    const teks = [[k.baris1, 1], [k.baris2, 1], [k.alamat, 0], [kontak, 0]].filter(([x]) => x && String(x).trim());
-    return [
-      T([R([
-        C(new Paragraph({ children: [logoRun(logo, 92)], spacing: { after: 60 } }), { w: lw, va: 'c', borders: bawah, m: z }),
-        C(teks.map(([t, nama], i) => P(t, { ...o, bold: !!nama && !!k.bold, size: t === kontak ? (Number(k.ukuranKontak) || 11) * 2 : o.size, after: i === teks.length - 1 ? 60 : 0 })), { w: tw, va: 'c', borders: bawah, m: z }),
-      ])], [lw, tw]),
-      P('', { size: 12 }),
+    const tengah = (t, bold) => P(t, { size: sz, font, al: 'C', line: 276, bold, indent: { right: 589 } });
+    const nama = [k.baris1, k.baris2].filter((x) => x && String(x).trim()).map((t) => tengah(t, !!k.bold));
+    const rows = [
+      R([C(new Paragraph({ children: [logoRun(logo, 85)], alignment: AlignmentType.CENTER }), { w: lw, vm: 'r', va: 'c', m: z, borders: { top: NB, left: NB, right: NB, bottom: { style: BorderStyle.SINGLE, size: 24, color: '000000' } } }),
+        C(nama.length ? nama : [P('')], { w: rest, span: 2, va: 'c', m: z })], { h: 715 }),
+      R([C('', { w: lw, vm: 'c', m: z }), C(tengah(k.alamat || ''), { w: rest, span: 2, va: 'c', m: z })], { h: 417 }),
     ];
+    if (k.laman && String(k.laman).trim()) rows.push(R([C('', { w: lw, vm: 'c', m: z }), C(P(k.laman, { size: szK, font, al: 'C', line: 276, indent: { right: 589 } }), { w: rest, span: 2, va: 'c', m: z })]));
+    const garis = { top: NB, left: NB, right: NB, bottom: { style: BorderStyle.SINGLE, size: 24, color: '000000' } };
+    rows.push(R([C('', { w: lw, vm: 'c', m: z, borders: garis }),
+      C(P(k.telp || '', { size: szK, font, line: 276, indent: { firstLine: 316 } }), { w: c2, va: 'c', m: z, borders: garis }),
+      C(P(k.email || '', { size: szK, font, line: 276, al: 'R', indent: { right: 306 } }), { w: c3, va: 'c', m: z, borders: garis })], { h: 433 }));
+    const bd = { top: NB, left: NB, right: NB, insideHorizontal: NB, insideVertical: NB, bottom: { style: BorderStyle.SINGLE, size: 24, color: '000000' } };
+    return [T(rows, [lw, c2, c3], { borders: bd }), P('', { size: 12 })];
   }
 
   /* =============== SPT (Komisioner / Sekretariat) — format disesuaikan file rapi user =============== */
